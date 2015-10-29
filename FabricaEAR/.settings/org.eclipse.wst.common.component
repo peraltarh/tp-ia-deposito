@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="FabricaEAR">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="FabricaApp.jar" deploy-path="/" handle="module:/resource/FabricaApp/FabricaApp">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="FabricaAppClient.jar" deploy-path="/" handle="module:/resource/FabricaAppClient/FabricaAppClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="DepositoAppClient.jar" deploy-path="/lib" handle="module:/resource/DepositoAppClient/DepositoAppClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="FabricaWeb.war" deploy-path="/" handle="module:/resource/FabricaWeb/FabricaWeb">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
