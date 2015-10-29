@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="articulo" type="articuloDTO"/>
+
+  <xs:complexType name="articuloDTO">
+    <xs:sequence>
+      <xs:element name="idArticulo" type="xs:int"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="marca" type="xs:string" minOccurs="0"/>
+      <xs:element name="origen" type="xs:string" minOccurs="0"/>
+      <xs:element name="fichaTecnica" type="xs:string" minOccurs="0"/>
+      <xs:element name="urlFoto" type="xs:string" minOccurs="0"/>
+      <xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+      <xs:element name="precio" type="xs:float"/>
+      <xs:element name="fechaAlta" type="xs:string" minOccurs="0"/>
+      <xs:element name="categoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="idDeposito" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

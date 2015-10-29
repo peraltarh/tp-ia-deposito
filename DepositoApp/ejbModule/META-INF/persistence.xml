@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence>
+	<persistence-unit name="DEP">
+		<jta-data-source>java:jboss/SQLSERVERDEP</jta-data-source>
+		<class>modelo.Articulo</class>
+		<class>controlador.AdminArticulosBean</class>
+		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.hbm2ddl.import_files" value="META-INF/sql/configuracion.sql" />
+		</properties>
+	</persistence-unit>
+</persistence>
