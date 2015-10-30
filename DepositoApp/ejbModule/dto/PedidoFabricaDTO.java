@@ -11,16 +11,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PedidoFabricaDTO {
 	@XmlElement
-	private int idSolicitudCompra;
+	private int idPedido;
 	@XmlElement
 	List<ItemsPedidoFabricaDTO> items;
 
-	public int getIdSolicitudCompra() {
-		return idSolicitudCompra;
+
+	public int getIdPedido() {
+		return idPedido;
 	}
 
-	public void setIdSolicitudCompra(int idSolicitudCompra) {
-		this.idSolicitudCompra = idSolicitudCompra;
+	public void setIdPedido(int idPedido) {
+		this.idPedido = idPedido;
 	}
 
 	public List<ItemsPedidoFabricaDTO> getItems() {

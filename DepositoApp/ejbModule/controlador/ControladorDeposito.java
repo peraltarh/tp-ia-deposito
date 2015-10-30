@@ -228,6 +228,6 @@ public class ControladorDeposito {
 			dep.actualizarStockArticulo(item.getIdArticulo(), nuevoStock);
 		}
 
-		dep.actualizarFechaRecepcionPedido(pedido.getIdSolicitudCompra(), new Date());		
+		dep.actualizarFechaRecepcionPedido(pedido.getIdPedido(), new Date());		
 	}
 }
