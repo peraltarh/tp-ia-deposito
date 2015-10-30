@@ -12,7 +12,12 @@
 <body>
 <h1>DEPOSITO</h1>
 <a href="nuevoArticulo.jsp">Crear nuevo Artículo</a>
+<br>
 <a href="busquedaArticulos.jsp">Buscar Artículo</a>
+<br>
 <a href="GenerarPedido.jsp" >Generar Pedidos</a>
+<br>
+<a href="ListarSolicitudesPendientes.jsp" >Listar Solicitudes Pedido Pendientes</a>
+<br>
 </body>
 </html>
