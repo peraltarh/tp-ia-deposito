@@ -158,14 +158,12 @@ public class ControladorDeposito {
 				articuloVO.setFechaAlta(itemPedido.getArticulo().getFechaAlta());
 				articuloVO.setFichaTecnica(itemPedido.getArticulo().getFichaTecnica());
 				articuloVO.setIdArticulo(itemPedido.getArticulo().getIdArticulo());
-				// TODO No se que onda aca!!!
-				articuloVO.setIdStock(itemPedido.getArticulo().getIdArticulo());
+				articuloVO.setIdStock(this.obtenerStock(itemPedido.getArticulo().getIdArticulo()).getIdStock());
 				articuloVO.setMarca(itemPedido.getArticulo().getMarca());
 				articuloVO.setNombre(itemPedido.getArticulo().getNombre());
 				articuloVO.setOrigen(itemPedido.getArticulo().getOrigen());
 				articuloVO.setPrecio(itemPedido.getArticulo().getPrecio());
-				// TODO No se que onda aca!!!
-				articuloVO.setStock(9);
+				articuloVO.setStock(this.obtenerStock(itemPedido.getArticulo().getIdArticulo()).getCantidad());
 				articuloVO.setUrlFoto(itemPedido.getArticulo().getUrlFoto());
 				itemPedidoVO.setArticulo(articuloVO);
 				itemPedidoVO.setCantidad(itemPedido.getCantidad());
