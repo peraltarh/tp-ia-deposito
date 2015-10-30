@@ -185,6 +185,8 @@ public class ControladorDeposito {
 		SolicitudDePedido solPe = new SolicitudDePedido();
 		solPe.setFecha(new Date());
 		solPe.setEstado(EnumSolicitudDePedido.PENDIENTE);
+		solPe.setIdDespacho(solicitud.getIdDespacho());
+		solPe.setIdSolicitudArticulo(solicitud.getIdSolicitudArticulo());
 		
 		List<ItemSolicitudArticuloDTO> itemsSolicitudDTO = solicitud.getItems();
 		List<ItemPedido> itemsSolicitud = new LinkedList<ItemPedido>();

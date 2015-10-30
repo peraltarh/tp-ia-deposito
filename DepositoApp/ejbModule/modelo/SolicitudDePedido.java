@@ -33,6 +33,9 @@ public class SolicitudDePedido implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idPedido")
 	private Pedido pedido;
+	private String idDespacho;
+	// id enviado por Despacho
+	private int idSolicitudArticuloDespacho;
 
 	public long getIdSolicitudDePedido() {
 		return idSolicitudDePedido;
@@ -72,6 +75,22 @@ public class SolicitudDePedido implements Serializable {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+
+	public String getIdDespacho() {
+		return idDespacho;
+	}
+
+	public void setIdDespacho(String idDespacho) {
+		this.idDespacho = idDespacho;
+	}
+
+	public int getIdSolicitudArticulo() {
+		return idSolicitudArticuloDespacho;
+	}
+
+	public void setIdSolicitudArticulo(int idSolicitudArticulo) {
+		this.idSolicitudArticuloDespacho = idSolicitudArticulo;
 	}
 
 }
