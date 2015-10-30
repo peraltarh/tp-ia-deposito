@@ -10,6 +10,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import bean.AdminDepositoBean;
 import dto.ItemSolicitudArticuloDTO;
+import dto.ItemsPedidoFabricaDTO;
+import dto.PedidoFabricaDTO;
 import dto.SolicitudArticuloDTO;
 import modelo.Articulo;
 import modelo.Categoria;
@@ -214,5 +216,18 @@ public class ControladorDeposito {
 			categoriasVO.add(categoriaVO);
 		}
 		return categoriasVO;
+	}
+	
+	public void registrarRecepcionArticulosFabrica (PedidoFabricaDTO pedido) {
+		List<ItemsPedidoFabricaDTO> items = pedido.getItems();
+		Iterator<ItemsPedidoFabricaDTO> it = items.iterator();
+		
+		while (it.hasNext()) {
+			ItemsPedidoFabricaDTO item = it.next();
+			int nuevoStock = dep.buscarStock(item.getIdArticulo()).getCantidad() + item.getCantidad();
+			dep.actualizarStockArticulo(item.getIdArticulo(), nuevoStock);
+		}
+
+		dep.actualizarFechaRecepcionPedido(pedido.getIdSolicitudCompra(), new Date());		
 	}
 }

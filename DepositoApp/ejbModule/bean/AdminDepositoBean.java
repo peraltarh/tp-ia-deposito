@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -51,6 +52,10 @@ public class AdminDepositoBean {
 	
 	public List<Categoria> obtenerCategorias() {
 		return adminArticulo.obtenerCategorias();
+	}
+
+	public void actualizarFechaRecepcionPedido(int idSolicitudCompra, Date fechaRecepcion) {
+		adminPedido.actualizarFechaRecepcionPedido(idSolicitudCompra,fechaRecepcion);	
 	}
 
 }

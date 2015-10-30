@@ -1,12 +1,15 @@
 package bean;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import modelo.EnumSolicitudDePedido;
+import modelo.Pedido;
 import modelo.SolicitudDePedido;
+import modelo.Stock;
 
 /**
  * Session Bean implementation class AdminPedido
@@ -25,4 +28,12 @@ public class AdminPedidoBean {
 		return resultado;
 	}
 
+	public void actualizarFechaRecepcionPedido(int idSolicitudCompra, Date fechaRecepcion) {
+		Pedido pedido = em.find(Pedido.class, idSolicitudCompra);
+		if (pedido != null)
+			pedido.setFechaRecepcion(fechaRecepcion);
+			em.merge(pedido);
+	}
+	
 }
+
