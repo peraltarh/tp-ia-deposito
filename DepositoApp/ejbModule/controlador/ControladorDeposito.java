@@ -224,8 +224,10 @@ public class ControladorDeposito {
 		
 		while (it.hasNext()) {
 			ItemsPedidoFabricaDTO item = it.next();
-			int nuevoStock = dep.buscarStock(item.getIdArticulo()).getCantidad() + item.getCantidad();
-			dep.actualizarStockArticulo(item.getIdArticulo(), nuevoStock);
+			Stock stockArticulo = dep.buscarStock(item.getIdArticulo());
+			
+			int nuevoStock = stockArticulo.getCantidad() + item.getCantidad();
+			dep.actualizarStockArticulo(stockArticulo.getIdStock(), nuevoStock);
 		}
 
 		dep.actualizarFechaRecepcionPedido(pedido.getIdPedido(), new Date());		

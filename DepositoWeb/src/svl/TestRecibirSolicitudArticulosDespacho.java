@@ -18,14 +18,14 @@ import mdb.Producer;
 /**
  * Servlet implementation class TestQueue
  */
-@WebServlet("/TestQueue")
-public class TestQueue extends HttpServlet {
+@WebServlet("/TestRecibirSolicitudArticulosDespacho")
+public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestQueue() {
+    public TestRecibirSolicitudArticulosDespacho() {
         super();
         // TODO Auto-generated constructor stub
     }
