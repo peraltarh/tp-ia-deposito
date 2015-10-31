@@ -2,8 +2,13 @@ package com.deposito;
 
 import java.io.StringReader;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.XmlElementDecl;
+
+
 import com.deposito.bean.PedidoRESTBean;
 
 
@@ -16,22 +21,17 @@ public class JAXRSRecepcionPedido {
         return "Hola!";
     }
 	
-    @PUT
-    @Consumes("application/json")
-    public synchronized void solitudPedido(String xml) {
-		JAXBContext jc;
-		try {
-			jc = JAXBContext.newInstance(PedidoRESTBean.class);
-			javax.xml.bind.Unmarshaller um = jc.createUnmarshaller();
-			PedidoRESTBean p = (PedidoRESTBean)um.unmarshal(new StringReader(xml));
-			System.out.println(p.getIdPedido());
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    @POST
+    @Path("/crearPedido")
+    @Consumes({"application/xml","application/json"})
+    public Response solitudPedido(PedidoRESTBean pedido) {
+		
+    	System.out.println(pedido.getIdPedido());
+		return Response.accepted().build();
     	
     	
     }
-	
 
+
+    
 }
