@@ -1,6 +1,9 @@
 package svl;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,7 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.ControladorDeposito;
+import modelo.ItemPedido;
+import vo.EnumEstadoPedidoVO;
 import vo.EnumSolicitudDePedidoVO;
+import vo.FabricaVO;
+import vo.ItemPedidoVO;
+import vo.PedidoVO;
 import vo.SolicitudDePedidoVO;
 
 /**
@@ -45,8 +53,20 @@ public class GenerarPedido extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		PedidoVO pedido = new PedidoVO();
+		pedido.setEstado(EnumEstadoPedidoVO.PENDIENTE);
+		pedido.setFabrica(new FabricaVO());
+		Date date = new Date();
+		pedido.setFechaRecepcion(null);
+		pedido.setFechaSolicitud(date);
+		// Genero la lista de items que voy a pedir a Fabrica.
+		List<ItemPedidoVO> itemsPedidosAFabrica = new ArrayList<ItemPedidoVO>();
+		
+		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
+		//TODO hay que asignar el IdPedido si resulta exitoso desde controlador.
+		pedido.setIdPedido(1);
+		
 	}
 
 }

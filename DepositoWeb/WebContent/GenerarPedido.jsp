@@ -10,33 +10,50 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<script>
-	function realizaProceso(){
+	<script>
+		function getSolicitudesPendientes(){
+		        $.ajax({	               
+		        	   data: ({
+		        		   	  generico : $("#solicitudesPendientes").val()        		   	  
+		        	          }),
+		        	    url:   'GenerarPedido',
+		                type:  'get',
+		                beforeSend: function () {
+		                	 $("#solicitudesPendientes").html("Procesando, espere por favor...");
+		                },
+		                success:  function (response) {
+		                        $("#solicitudesPendientes").html(response);
+		                }
+		        });
+		}
+		function postPedidoAFabrica(){
 	        $.ajax({	               
 	        	   data: ({
-	        		   	  generico : $("#resultado").val()        		   	  
+	        		   	  generico : $("#nroPedido").val()        		   	  
 	        	          }),
 	        	    url:   'GenerarPedido',
-	                type:  'get',
+	                type:  'post',
 	                beforeSend: function () {
-	                	 $("#resultado").html("Procesando, espere por favor...");
+	                	 $("#nroPedido").html("Generando un Pedido, espere por favor...");
 	                },
 	                success:  function (response) {
-	                        $("#resultado").html(response);
+	                        $("#nroPedido").html(response);
 	                }
 	        });
-	}
+		}
 	</script>
 
 
 <h1><b>Generar Pedido</b></h1>
 <br>
-<button type="submit" class="btn btn-default" onclick="realizaProceso()">Listar Solicitudes Pendientes</button>
+<button type="submit" class="btn btn-default" onclick="getSolicitudesPendientes()">Listar Solicitudes Pendientes</button>
 <br>
-<span id="resultado"></span>
+<span id="solicitudesPendientes"></span>
 <br>
-<button type="submit" class="btn btn-default" >Solicitar a Fabrica</button>
-
+<button type="submit" class="btn btn-default" onclick="postPedidoAFabrica()">Generar Pedido a Fabrica</button>
+<br>
+<span id="nroPedido"></span>
+<br>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
