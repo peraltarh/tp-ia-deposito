@@ -62,7 +62,13 @@ public class GenerarPedido extends HttpServlet {
 		pedido.setFechaSolicitud(date);
 		// Genero la lista de items que voy a pedir a Fabrica.
 		List<ItemPedidoVO> itemsPedidosAFabrica = new ArrayList<ItemPedidoVO>();
-		
+		for(int i=0; i < pedido.getItemsPedidosAFabrica().size();i++){
+			ItemPedidoVO item = new ItemPedidoVO();
+			item.setArticulo(pedido.getItemsPedidosAFabrica().get(i).getArticulo());
+			item.setCantidad(pedido.getItemsPedidosAFabrica().get(i).getCantidad());
+			item.setIdItemPedido(pedido.getItemsPedidosAFabrica().get(i).getIdItemPedido());
+			itemsPedidosAFabrica.add(item);
+		}	
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
 		//TODO hay que asignar el IdPedido si resulta exitoso desde controlador.
 		pedido.setIdPedido(1);
