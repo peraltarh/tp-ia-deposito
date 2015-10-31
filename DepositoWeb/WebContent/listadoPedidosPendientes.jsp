@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -16,32 +17,25 @@
   <%@page import="vo.*" %>
    
   <table class="table table-bordered">
-			<thead>
-			
-			<tr>
-				<th>ID SOLPE</th>
-				<th>Fecha</th>
-				<th>Seleccionar</th>
-				<th>ID Articulo</th>
-				<th>Descripcion Articulo</th>
-				<th>Stock Actual</th>
-				<th>Stock Solicitado</th>
-				<th>Stock a Solicitar</th>
-			</tr>
-			
-			</thead>
-			
-			<tbody>
-			
-			<% @SuppressWarnings("unchecked")
-		  	List<SolicitudDePedidoVO> miLista = (List<SolicitudDePedidoVO>) request.getAttribute("listadoSolicitudesPedidoPendientes");%>
-			<%for(int i=0; i < miLista.size();i++){%>
-				<tr>
-					<th><%=miLista.get(i).getIdSolicitudDePedido()%></th>
+	  <thead>
+		  <tr>
+		  	<th>ID SOLPE</th>
+		  	<th>Fecha</th>
+		  	<th>Modificar Stock</th>	  	
+		  </tr>
+	  </thead>
+	  	<tbody>  
+		  	<% @SuppressWarnings("unchecked")
+		  	List<PedidoVO> pedidos = (List<PedidoVO>) request.getAttribute("listadoPedidosPendientes");%>
+		  	<% for (PedidoVO unPedido: pedidos) {
+		  	%>			
+				<tr>		
+					<td> <%=unPedido.getIdPedido()%> </td>
+					<td> <%=unPedido.getFechaSolicitud() %> </td>
+					<td> <a href="modificarStockArticulo.jsp?idStock=<%=unPedido.getIdPedido()%>">Entregar</a> </td>									
 				</tr>
-			<%}%>
-			
-			</tbody>
+		  	<%}%>
+	  	</tbody>
   </table>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

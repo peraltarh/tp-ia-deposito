@@ -17,7 +17,7 @@
 <br>
 <a href="GenerarPedido.jsp" >Generar Pedidos</a>
 <br>
-<a href="ListarSolicitudesPendientes.jsp" >Listar Solicitudes Pedido Pendientes</a>
+<a href="ListarPedidosPendientes.jsp" >Listar Solicitudes Pedido Pendientes</a>
 <br>
 </body>
 </html>

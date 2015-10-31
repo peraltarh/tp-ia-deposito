@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.ControladorDeposito;
+import vo.PedidoVO;
 import vo.SolicitudDePedidoVO;
 
 /**
- * Servlet implementation class BusquedaProductos
+ * Servlet implementation class ListarPedidosPendientes
  */
-@WebServlet("/BusquedaArticulos")
-public class ListarSolicitudesPedidos extends HttpServlet {
+@WebServlet("/ListarPedidosPendientes")
+public class ListarPedidosPendientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -27,7 +28,7 @@ public class ListarSolicitudesPedidos extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListarSolicitudesPedidos() {
+	public ListarPedidosPendientes() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,11 +42,11 @@ public class ListarSolicitudesPedidos extends HttpServlet {
 
 		String filtro = (String) request.getParameter("filtro");
 
-		List<SolicitudDePedidoVO> solicitudes = controladorDep.listarSolicitudesPendientes();
+		List<PedidoVO> solicitudes = controladorDep.listarPedidosPendientes();
 		
-		request.setAttribute("listadoSolicitudesPedidoPendientes", solicitudes);
+		request.setAttribute("listadoPedidosPendientes", solicitudes);
 
-		RequestDispatcher rd = request.getRequestDispatcher("ListarSolicitudesPedidos.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("listadoPedidosPendientes.jsp");
 		rd.forward(request, response);
 	}
 

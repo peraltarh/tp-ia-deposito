@@ -4,35 +4,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Listar Solicitudes Pedidos</title>
+<title>Listado Pedidos Pendientes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <script>
-	function realizaProceso(){
-	        $.ajax({	               
-	        	   data: ({
-	        		   	  idSOLPE: $("#filtro").val()        		   	  
-	        	          }),
-	        	    url:   'ListarSolicitudesPedidos',
-	                type:  'get',
-	                beforeSend: function () {
-	                        $("#resultado").html("Procesando, espere por favor...");
-	                },
-	                success:  function (response) {
-	                        $("#resultado").html(response);
-	                }
-	        });
-	}
+function realizaProceso(){
+    $.ajax({	               
+    	   data: ({
+    		   	  filtro : $("#filtro").val()        		   	  
+    	          }),
+    	    url:   'ListarPedidosPendientes',
+            type:  'get',
+            beforeSend: function () {
+                    $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) {
+                    $("#resultado").html(response);
+            }
+    });
+}
 	</script>
 <h1>DEPOSITO</h1>
-<a href="nuevoArticulo.jsp">Crear nuevo Artículo</a>
-<a href="busquedaArticulos.jsp">Buscar Artículo</a>
+
 <a href="index.jsp">Indice</a>
 
-<h1>Seleccionar Solicitud Pedido</h1>
+<h1>Seleccionar Pedido</h1>
 <br>
 	<table>
 		<tr>
@@ -43,7 +42,7 @@
 		<tr>
 			<td>
 				<button type="submit" class="btn btn-default"
-					onclick="realizaProceso();">Buscar Solicitud Pedido</button>
+					onclick="realizaProceso();">Buscar Pedido</button>
 			</td>
 		</tr>
 	</table>
