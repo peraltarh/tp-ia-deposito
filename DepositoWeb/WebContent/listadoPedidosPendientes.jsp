@@ -19,9 +19,9 @@
   <table class="table table-bordered">
 	  <thead>
 		  <tr>
-		  	<th>ID SOLPE</th>
-		  	<th>Fecha</th>
-		  	<th>Modificar Stock</th>	  	
+		  	<th>ID PEDIDO</th>
+		  	<th>FECHA</th>
+		  	<th>ENTREGAR PEDIDO</th>	  	
 		  </tr>
 	  </thead>
 	  	<tbody>  
@@ -32,7 +32,7 @@
 				<tr>		
 					<td> <%=unPedido.getIdPedido()%> </td>
 					<td> <%=unPedido.getFechaSolicitud() %> </td>
-					<td> <a href="modificarStockArticulo.jsp?idStock=<%=unPedido.getIdPedido()%>">Entregar</a> </td>									
+					<td> <a href="EntregarPedido.jsp?idPedido=<%=unPedido.getIdPedido()%>">Entregar Pedido</a> </td>									
 				</tr>
 		  	<%}%>
 	  	</tbody>
