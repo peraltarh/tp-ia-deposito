@@ -17,6 +17,7 @@ import modelo.Articulo;
 import modelo.Categoria;
 import modelo.Despacho;
 import modelo.EnumEstadoItemPedido;
+import modelo.EnumEstadoPedido;
 import modelo.EnumSolicitudDePedido;
 import modelo.ItemPedido;
 import modelo.Pedido;
@@ -231,5 +232,40 @@ public class ControladorDeposito {
 		}
 
 		dep.actualizarFechaRecepcionPedido(pedido.getIdPedido(), new Date());		
+	}
+
+	public int generarPedido(PedidoVO pedidoVO) {
+		Pedido pedido = new Pedido();
+		pedido.setEstado(EnumEstadoPedido.PENDIENTE);
+		// TODO setear una fabrica, preguntar a Rodri o a Franco.
+		pedido.setFabrica(null);
+		pedido.setFechaSolicitud(pedidoVO.getFechaSolicitud());
+		List<ItemPedido> itemsPedidosAFabrica = new ArrayList<ItemPedido>();
+		for(int i = 0; i < pedidoVO.getItemsPedidosAFabrica().size(); i++){
+			ItemPedido item = new ItemPedido();
+			Articulo articulo = new Articulo();
+			Categoria categoria = new Categoria();
+			articulo.setDescripcion(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getDescripcion());
+			articulo.setFechaAlta(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getFechaAlta());
+			articulo.setFichaTecnica(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getFichaTecnica());
+			articulo.setIdArticulo(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getIdArticulo());
+			articulo.setMarca(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getMarca());
+			articulo.setNombre(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getNombre());
+			articulo.setOrigen(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getOrigen());
+			articulo.setPrecio(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getPrecio());
+			categoria.setIdCategoria(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getCategoria().getIdCategoria());
+			categoria.setNombre(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getCategoria().getNombre());
+			articulo.setTipo(categoria);
+			articulo.setUrlFoto(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getUrlFoto());
+			item.setArticulo(articulo);
+			item.setCantidad(pedidoVO.getItemsPedidosAFabrica().get(i).getCantidad());
+			item.setEstado(EnumEstadoItemPedido.PENDIENTE);
+			item.setIdItemPedido(pedidoVO.getItemsPedidosAFabrica().get(i).getIdItemPedido());
+			itemsPedidosAFabrica.add(item);
+		}
+		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
+		
+		// TODO El persist tiene que devolver el id con el que se guarda el pedido.
+		return 0;
 	}
 }

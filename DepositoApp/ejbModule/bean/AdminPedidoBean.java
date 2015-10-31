@@ -9,7 +9,6 @@ import javax.persistence.Query;
 import modelo.EnumSolicitudDePedido;
 import modelo.Pedido;
 import modelo.SolicitudDePedido;
-import modelo.Stock;
 
 /**
  * Session Bean implementation class AdminPedido

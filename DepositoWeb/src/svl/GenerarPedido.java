@@ -71,8 +71,11 @@ public class GenerarPedido extends HttpServlet {
 		}	
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
 		//TODO hay que asignar el IdPedido si resulta exitoso desde controlador.
-		pedido.setIdPedido(1);
-		
+		pedido.setIdPedido(conDep.generarPedido(pedido));
+		// TODO se puede mandar desde un dopost un request???
+		request.setAttribute("nroPedido", pedido.getIdPedido());
+		RequestDispatcher rd = request.getRequestDispatcher("GenerarPedido.jsp");
+		rd.forward(request, response);
 	}
 
 }
