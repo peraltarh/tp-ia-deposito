@@ -16,7 +16,9 @@ public class AdminArticuloBean {
 	@PersistenceContext(unitName = "DEP")
 	private EntityManager em;
 
-	public void nuevoArticulo(Articulo art) {
+	public void nuevoArticulo(Articulo art, long idCategoria) {
+		Categoria categoria = em.find(Categoria.class, idCategoria);
+		art.setTipo(categoria);
 		em.persist(art);
 	}
 
@@ -64,7 +66,7 @@ public class AdminArticuloBean {
 	
 	public List<Categoria> obtenerCategorias() {
 		Query query = em.createQuery("SELECT c "
-				+ "FROM Categoria s ");
+				+ "FROM Categoria c ");
 		
 		List<Categoria> result = (List<Categoria>)query.getResultList();
 		return result;

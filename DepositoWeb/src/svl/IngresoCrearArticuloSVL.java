@@ -1,8 +1,10 @@
 package svl;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.ControladorDeposito;
+import vo.CategoriaVO;
 
 /**
  * Servlet implementation class CrearArticuloSVL
  */
-@WebServlet("/CrearArticuloSVL")
-public class CrearArticuloSVL extends HttpServlet {
+@WebServlet("/IngresoCrearArticuloSVL")
+public class IngresoCrearArticuloSVL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private ControladorDeposito controladorDep;
@@ -23,7 +26,7 @@ public class CrearArticuloSVL extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CrearArticuloSVL() {
+	public IngresoCrearArticuloSVL() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,22 +38,10 @@ public class CrearArticuloSVL extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String nombre = (String) request.getParameter("nombre");
-		String descripcion = (String) request.getParameter("descripcion");
-		String marca = (String) request.getParameter("marca");
-		int precio = Integer.parseInt(request.getParameter("precio"));
-		String url = (String) request.getParameter("url");
-		String origen = (String) request.getParameter("origen");
-		String ficha = (String) request.getParameter("ficha");
-		int categoria = Integer.parseInt(request.getParameter("categoria"));
-		int cantidad= Integer.parseInt(request.getParameter("cantidad"));
-
-		controladorDep.nuevoArticulo(nombre,descripcion,marca,precio,url,origen,ficha,categoria,cantidad);
-		response.getWriter().println("Articulo creado con exito");;
-		
-
-		
-
+		List<CategoriaVO> categoriasVO = controladorDep.obtenerCategorias();
+		request.setAttribute("categorias", categoriasVO);
+		RequestDispatcher rd = request.getRequestDispatcher("nuevoArticulo.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

@@ -21,8 +21,8 @@ public class AdminDepositoBean {
 	@EJB
 	private AdminSolicitudPedidoBean adminSolPe;
 
-	public void nuevoArticulo(Articulo articulo, Stock stock) {
-		adminArticulo.nuevoArticulo(articulo);
+	public void nuevoArticulo(Articulo articulo, Stock stock, long idCategoria) {
+		adminArticulo.nuevoArticulo(articulo,idCategoria);
 		adminArticulo.crearStock(stock);
 	}
 

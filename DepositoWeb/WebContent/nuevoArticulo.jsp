@@ -10,6 +10,8 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+  <%@page import="java.util.*" %>
+  <%@page import="vo.*" %>
 	<script>
 	function realizaProceso(){
 	        $.ajax({	               
@@ -37,7 +39,7 @@
 	</script>  
 
 <h1>DEPOSITO</h1>
-<a href="nuevoArticulo.jsp">Crear nuevo Artículo</a>
+<a href="IngresoCrearArticuloSVL">Crear nuevo Artículo</a>
 <a href="busquedaArticulos.jsp">Buscar Artículo</a>
 
 <h1>Crear nuevo Articulo</h1>
@@ -79,7 +81,14 @@
 		</tr>
 		<tr>
 			<td><label for="categoria">Categoría:</label></td>
-			<td><input type="text" class="form-control" id="categoria">
+		 	<td>
+				<select class="form-control" id="categoria">				  
+				  <% List<CategoriaVO> categorias =(List<CategoriaVO>) request.getAttribute("categorias");%>
+			  	  <% for (CategoriaVO unaCategoria: categorias) {
+			  	  %>								 		
+				     <option value=<%=unaCategoria.getIdCategoria()%>> <%=unaCategoria.getNombre()%> </option>						 													
+			  	  <%}%>					  
+				</select>
 			</td>
 		</tr>
 		<tr>

@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>DEPOSITO</h1>
-<a href="nuevoArticulo.jsp">Crear nuevo Artículo</a>
+<a href="IngresoCrearArticuloSVL">Crear nuevo Artículo</a>
 <br>
 <a href="busquedaArticulos.jsp">Buscar Artículo</a>
 <br>

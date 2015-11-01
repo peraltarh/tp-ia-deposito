@@ -47,7 +47,7 @@ public class ControladorDeposito {
 	AdminNoticacionBean notificacion;
 
 	public void nuevoArticulo(String nombre, String descripcion, String marca, int precio, String url, String origen,
-			String ficha, String categoria, int cantidad) {
+			String ficha, long idCategoria, int cantidad) {
 		Articulo articulo = new Articulo();
 
 		articulo.setNombre(nombre);
@@ -58,18 +58,18 @@ public class ControladorDeposito {
 		articulo.setOrigen(origen);
 		articulo.setFichaTecnica(ficha);
 		articulo.setFechaAlta(new Date());
-
+		/*
 		Categoria cat = new Categoria();
-		cat.setNombre(categoria);
-
+		cat.setIdCategoria(idCategoria);
+		
 		articulo.setTipo(cat);
-
+		*/
 		Stock stock = new Stock();
 
 		stock.setCantidad(cantidad);
 		stock.setArticulo(articulo);
 
-		dep.nuevoArticulo(articulo, stock);
+		dep.nuevoArticulo(articulo, stock,idCategoria);
 
 		notificacion.informarArticulo(articulo, "DES");
 		// notificacion.informarArticulo(articulo, "DEP");
