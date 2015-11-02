@@ -33,5 +33,9 @@ public class AdminPedidoBean {
 		return (List<Pedido>) q.getResultList();
 	}
 	
+	public void persistirPedido (Pedido pedido){
+		em.persist(pedido);
+	}
+	
 
 }

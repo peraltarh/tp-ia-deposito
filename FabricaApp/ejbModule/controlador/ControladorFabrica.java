@@ -3,21 +3,28 @@ package controlador;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import bean.AdminFabricaBean;
-import modelo.Despacho;
 import modelo.EnumEstadoPedido;
 import modelo.Pedido;
 import vo.EnumEstadoPedidoVO;
 import vo.PedidoVO;
 
-@Stateless
+@Stateful
 public class ControladorFabrica {
 	private List<Pedido> pedidos;
-	private List<Despacho> despachos;
 
 	@EJB
 	private AdminFabricaBean fab;
+	
+	public void agregarPedido (Pedido pedido){
+		if(pedidos == null) pedidos = new ArrayList<Pedido>();
+		pedidos.add(pedido);
+		
+		fab.persistirPedido(pedido);
+		
+	}
+	
 
 	public List<PedidoVO> buscarPedidos() {
 

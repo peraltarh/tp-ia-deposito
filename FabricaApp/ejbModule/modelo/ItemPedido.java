@@ -19,6 +19,7 @@ public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idItemPedidoLocal;
 	private int idItemPedido;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idArticulo")
@@ -56,6 +57,14 @@ public class ItemPedido implements Serializable {
 
 	public void setEstado(EnumEstadoItemPedido estado) {
 		this.estado = estado;
+	}
+
+	public int getIdItemPedidoLocal() {
+		return idItemPedidoLocal;
+	}
+
+	public void setIdItemPedidoLocal(int idItemPedidoLocal) {
+		this.idItemPedidoLocal = idItemPedidoLocal;
 	}
 
 }

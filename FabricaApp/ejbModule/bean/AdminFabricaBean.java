@@ -26,5 +26,9 @@ public class AdminFabricaBean {
 	public AdminFabricaBean() {
 		super();
 	}
+	
+	public void persistirPedido (Pedido pedido){
+		adminPedido.persistirPedido(pedido);
+	}
 
 }

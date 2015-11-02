@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 @Entity
 @Table(name = "pedidos")
@@ -24,6 +24,7 @@ public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idPedidoLocal;
 	private int idPedido;
 	private Date fechaSolicitud;
 	private EnumEstadoPedido estado;
@@ -31,8 +32,6 @@ public class Pedido implements Serializable {
 	@JoinColumn(name = "idPedido")
 	List<ItemPedido> itemsPedidosAFabrica;
 	private Date fechaRecepcion;
-	@Transient
-	private Fabrica fabrica;
 
 	public int getIdPedido() {
 		return idPedido;
@@ -74,12 +73,13 @@ public class Pedido implements Serializable {
 		this.fechaRecepcion = fechaRecepcion;
 	}
 
-	public Fabrica getFabrica() {
-		return fabrica;
+
+	public int getIdPedidoLocal() {
+		return idPedidoLocal;
 	}
 
-	public void setFabrica(Fabrica fabrica) {
-		this.fabrica = fabrica;
+	public void setIdPedidoLocal(int idPedidoLocal) {
+		this.idPedidoLocal = idPedidoLocal;
 	}
 
 	public String toString (){

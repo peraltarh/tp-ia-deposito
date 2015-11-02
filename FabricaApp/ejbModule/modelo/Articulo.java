@@ -21,6 +21,7 @@ public class Articulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idArticuloLocal;
 	private int idArticulo;
 	private String nombre;
 	private String marca;
@@ -113,6 +114,14 @@ public class Articulo implements Serializable {
 
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
+	}
+
+	public int getIdArticuloLocal() {
+		return idArticuloLocal;
+	}
+
+	public void setIdArticuloLocal(int idArticuloLocal) {
+		this.idArticuloLocal = idArticuloLocal;
 	}
 
 }

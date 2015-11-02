@@ -17,6 +17,7 @@ public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long idCategoriaLocal;
 	private long idCategoria;
 	private String nombre;
 
@@ -34,6 +35,14 @@ public class Categoria implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public long getIdCategoriaLocal() {
+		return idCategoriaLocal;
+	}
+
+	public void setIdCategoriaLocal(long idCategoriaLocal) {
+		this.idCategoriaLocal = idCategoriaLocal;
 	}
 
 }
