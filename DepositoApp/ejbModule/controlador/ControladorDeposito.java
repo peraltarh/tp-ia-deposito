@@ -73,7 +73,7 @@ public class ControladorDeposito {
 
 		notificacion.informarArticulo(articulo, "DES");
 		// notificacion.informarArticulo(articulo, "DEP");
-		// notificacion.informarArticuloLM(articulo);
+		notificacion.informarArticuloLM(articulo);
 
 	}
 

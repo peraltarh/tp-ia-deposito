@@ -12,6 +12,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import notificacion.NotificacionSincronica;
+import wsLM.LogDTO;
+
 @Entity
 @Table(name = "configuracion")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -30,6 +33,7 @@ public class Configuracion implements Serializable {
 	private String descripcion;
 	private String recurso;
 	private String url;
+	private String activo;
 
 	public int getIdConfiguracion() {
 		return IdConfiguracion;
@@ -74,6 +78,18 @@ public class Configuracion implements Serializable {
 	public void notificar(String notificacion) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void notificarLog(LogDTO detalle) {
+		
+	}
+
+	public String getActivo() {
+		return activo;
+	}
+
+	public void setActivo(String activo) {
+		this.activo = activo;
 	}
 
 }

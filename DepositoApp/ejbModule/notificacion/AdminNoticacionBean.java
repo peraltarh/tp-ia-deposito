@@ -1,6 +1,8 @@
 package notificacion;
 
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,9 +14,11 @@ import javax.xml.bind.Marshaller;
 
 import bean.AdminConfiguracionBean;
 import configuracion.Configuracion;
+import configuracion.ConfiguracionAsincronica;
+import configuracion.ConfiguracionSincronica;
 import dto.ArticuloDTO;
-import dto.DetalleLogLmDTO;
 import modelo.Articulo;
+import wsLM.LogDTO;
 
 @Stateless
 public class AdminNoticacionBean {
@@ -42,7 +46,11 @@ public class AdminNoticacionBean {
 		ArticuloDTO articuloDTO = new ArticuloDTO();
 		articuloDTO.setCategoria(articulo.getTipo().getNombre());
 		articuloDTO.setDescripcion(articulo.getDescripcion());
-		articuloDTO.setFechaAlta(articulo.getFechaAlta().toString());
+	
+		SimpleDateFormat formatFecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+		String fecha = formatFecha.format(articulo.getFechaAlta());
+		
+		articuloDTO.setFechaAlta(fecha);
 		articuloDTO.setFichaTecnica(articulo.getFichaTecnica());
 		articuloDTO.setIdArticulo(articulo.getIdArticulo());
 		articuloDTO.setIdDeposito("DEP-G12");
@@ -69,28 +77,50 @@ public class AdminNoticacionBean {
 	}
 
 	public void informarArticuloLM(Articulo articulo) {
-		this.gruposAnotificar = adm.buscarConfiguracion("MON");
+		this.gruposAnotificar = adm.buscarConfiguracionAsincronica("MON");
 				
-		Iterator<Configuracion> it = gruposAnotificar.iterator();
-		String notificacion = obtenerLogXML(articulo);
-
-		while (it.hasNext()) {
-			Configuracion unaConfiguracion = it.next();
+		Iterator<Configuracion> itAsync = gruposAnotificar.iterator();
+		
+		String idModulo = "DEP-G12";
+		String mensaje = "Articulo creado: Id " + articulo.getIdArticulo() + "Nombre:" + articulo.getNombre();
+		String notificacion = idModulo + "_" + mensaje;
+				
+		while (itAsync.hasNext()) {
+			Configuracion unaConfiguracion = itAsync.next();
 			unaConfiguracion.notificar(notificacion);
 		}
+		
+		this.gruposAnotificar = adm.buscarConfiguracionSincronica("MON");
+		
+		LogDTO detalle = new LogDTO();
+		
+		SimpleDateFormat formatFecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+		String fecha = formatFecha.format(new Date());
+		
+		detalle.setFecha(formatFecha.toString());
+		detalle.setIdModulo(idModulo);
+		detalle.setMensaje(mensaje);
+		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
+		
+		while (itSync.hasNext()) {
+			Configuracion unaConfiguracion = itSync.next();
+			unaConfiguracion.notificarLog(detalle);
+		}
+		
 
 	}
 
+
 	private String obtenerLogXML(Articulo articulo) {
-		DetalleLogLmDTO logLM = new DetalleLogLmDTO();
-		logLM.setFecha("ej fecha");
-		logLM.setModulo("DEP-G12");
-		logLM.descripcion("Se creo el articulo: Id " + articulo.getIdArticulo() + "Nombre:" + articulo.getNombre());
+		LogDTO logLM = new LogDTO();
+		//logLM.setFecha("ej fecha");
+		//logLM.setIdModulo("DEP-G12");
+		//logLM.descripcion("Se creo el articulo: Id " + articulo.getIdArticulo() + "Nombre:" + articulo.getNombre());
 
 		JAXBContext jc;
 		StringWriter writer = new StringWriter();
 		try {
-			jc = JAXBContext.newInstance(DetalleLogLmDTO.class);
+			jc = JAXBContext.newInstance(LogDTO.class);
 			Marshaller m = jc.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
