@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,42 +10,52 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<script>
-	function realizaProceso(){
-	        $.ajax({	               
-	        	   data: ({ 
-	        		   	  cantidad : $("#cantidad").val()        		   	  
-	        	          }),
-	        	    url:   'EntregarSolicitudPedido',
-	                type:  'post',
-	                beforeSend: function () {
-	                        $("#resultado").html("Procesando, espere por favor...");
-	                },
-	                success:  function (response) {
-	                        $("#resultado").html(response);
-	                }
-	        });
-	}
-	</script>  
+	<script>
+function realizaProceso(){
+    $.ajax({	               
+    	   data: ({
+    		   	  filtro : $("#idSolicitud").val()        		   	  
+    	          }),
+    	    url:   'ListarDetalleSolPe',
+            type:  'get',
+            beforeSend: function () {
+                    $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) {
+                    $("#resultado").html(response);
+            }
+    });
+}
+	</script>
 
-<h1>DEPOSITO</h1>
-<a href="index.jsp">Indice</a>
+	<h1>DEPOSITO</h1>
+	<a href="index.jsp">Indice</a>
 
-<h1>Entregar Solicitud Pedido</h1>
-<br>
+	<h1>Entregar Solicitud Pedido</h1>
+	<br>
 
 	<%
 		session.setAttribute("idSolicitud", request.getParameter("idSolicitud"));
 	%>
-	
-	<table class="table table-bordered">
-	  <thead>
-		  <tr>
-		  	<th>ID PEDIDO</th>
-		  	<th>Fecha</th>
-		  	<th>Modificar Stock</th>	  	
-		  </tr>
-	  </thead>
-	  	<tbody>  
+<br>
+	<table>
+		<tr>
+			<td><label for="idPedido">idPedido:</label></td>
+			<td><input type="text" class="form-control" id="filtro">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button type="submit" class="btn btn-default"
+					onclick="realizaProceso();">Ver Detalle</button>
+			</td>
+		</tr>
+	</table>
+	<span id="resultado"></span>  	
+			
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
