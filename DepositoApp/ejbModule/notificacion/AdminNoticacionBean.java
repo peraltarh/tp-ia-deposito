@@ -97,7 +97,7 @@ public class AdminNoticacionBean {
 		SimpleDateFormat formatFecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 		String fecha = formatFecha.format(new Date());
 		
-		detalle.setFecha(formatFecha.toString());
+		detalle.setFecha(fecha);
 		detalle.setIdModulo(idModulo);
 		detalle.setMensaje(mensaje);
 		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
