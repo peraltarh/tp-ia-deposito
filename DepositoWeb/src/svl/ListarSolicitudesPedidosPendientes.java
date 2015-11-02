@@ -16,10 +16,10 @@ import vo.PedidoVO;
 import vo.SolicitudDePedidoVO;
 
 /**
- * Servlet implementation class ListarPedidosPendientes
+ * Servlet implementation class ListarSolicitudesPedidosPendientes
  */
-@WebServlet("/ListarPedidosPendientes")
-public class ListarPedidosPendientes extends HttpServlet {
+@WebServlet("/ListarSolicitudesPedidosPendientes")
+public class ListarSolicitudesPedidosPendientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -28,7 +28,7 @@ public class ListarPedidosPendientes extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListarPedidosPendientes() {
+	public ListarSolicitudesPedidosPendientes() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -42,11 +42,11 @@ public class ListarPedidosPendientes extends HttpServlet {
 
 		String filtro = (String) request.getParameter("filtro");
 
-		List<PedidoVO> solicitudes = controladorDep.listarPedidosPendientes();
+		List<SolicitudDePedidoVO> solicitudes = controladorDep.listarPedidosPendientes();
 		
-		request.setAttribute("listadoPedidosPendientes", solicitudes);
+		request.setAttribute("listadoSolicitudesPedidosPendientes", solicitudes);
 
-		RequestDispatcher rd = request.getRequestDispatcher("listadoPedidosPendientes.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("listadoSolicitudesPedidosPendientes.jsp");
 		rd.forward(request, response);
 	}
 

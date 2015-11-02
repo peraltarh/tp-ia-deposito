@@ -26,13 +26,13 @@
 	  </thead>
 	  	<tbody>  
 		  	<% @SuppressWarnings("unchecked")
-		  	List<PedidoVO> pedidos = (List<PedidoVO>) request.getAttribute("listadoPedidosPendientes");%>
-		  	<% for (PedidoVO unPedido: pedidos) {
+		  	List<SolicitudDePedidoVO> solicitudesVO = (List<SolicitudDePedidoVO>) request.getAttribute("listadoSolicitudesPedidosPendientes");%>
+		  	<% for (SolicitudDePedidoVO solicitudVO: solicitudesVO) {
 		  	%>			
 				<tr>		
-					<td> <%=unPedido.getIdPedido()%> </td>
-					<td> <%=unPedido.getFechaSolicitud() %> </td>
-					<td> <a href="EntregarPedido.jsp?idPedido=<%=unPedido.getIdPedido()%>">Entregar Pedido</a> </td>									
+					<td> <%=solicitudVO.getIdSolicitudDePedido()%> </td>
+					<td> <%=solicitudVO.getFecha() %> </td>
+					<td> <a href="EntregarSolicitudPedido.jsp?idSolicitud=<%=solicitudVO.getIdSolicitudDePedido()%>">Entregar Solicitud Pedido</a> </td>									
 				</tr>
 		  	<%}%>
 	  	</tbody>

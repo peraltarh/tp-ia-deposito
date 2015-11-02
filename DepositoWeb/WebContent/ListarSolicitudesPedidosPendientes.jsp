@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Listado Pedidos Pendientes</title>
+<title>Listado Solicitudes Pedidos Pendientes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +16,7 @@ function realizaProceso(){
     	   data: ({
     		   	  filtro : $("#filtro").val()        		   	  
     	          }),
-    	    url:   'ListarPedidosPendientes',
+    	    url:   'ListarSolicitudesPedidosPendientes',
             type:  'get',
             beforeSend: function () {
                     $("#resultado").html("Procesando, espere por favor...");
@@ -31,7 +31,7 @@ function realizaProceso(){
 
 <a href="index.jsp">Indice</a>
 
-<h1>Seleccionar Pedido</h1>
+<h1>Seleccionar Solicitud Pedido</h1>
 <br>
 	<table>
 		<tr>
@@ -42,7 +42,7 @@ function realizaProceso(){
 		<tr>
 			<td>
 				<button type="submit" class="btn btn-default"
-					onclick="realizaProceso();">Buscar Pedido</button>
+					onclick="realizaProceso();">Buscar Solicitud Pedido</button>
 			</td>
 		</tr>
 	</table>
