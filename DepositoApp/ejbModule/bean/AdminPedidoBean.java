@@ -34,5 +34,9 @@ public class AdminPedidoBean {
 			em.merge(pedido);
 	}
 	
+	public void grabarPedido(Pedido pedido){
+		em.persist(pedido);
+	}
+	
 }
 

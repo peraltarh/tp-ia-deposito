@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import bean.AdminDepositoBean;
+import bean.AdminPedidoBean;
 import dto.ItemSolicitudArticuloDTO;
 import dto.ItemsPedidoFabricaDTO;
 import dto.PedidoFabricaDTO;
@@ -42,6 +43,9 @@ public class ControladorDeposito {
 	private List<Portal> portales;
 	@EJB
 	private AdminDepositoBean dep;
+	
+	@EJB
+	private AdminPedidoBean ped;
 
 	@EJB
 	AdminNoticacionBean notificacion;
@@ -265,7 +269,7 @@ public class ControladorDeposito {
 		}
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
 		
-		// TODO El persist tiene que devolver el id con el que se guarda el pedido.
-		return 0;
+		ped.grabarPedido(pedido);
+		return pedido.getIdPedido();
 	}
 }
