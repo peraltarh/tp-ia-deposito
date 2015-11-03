@@ -43,7 +43,7 @@ public class ControladorDeposito {
 	private List<Portal> portales;
 	@EJB
 	private AdminDepositoBean dep;
-	
+
 	@EJB
 	private AdminPedidoBean ped;
 
@@ -65,9 +65,9 @@ public class ControladorDeposito {
 		/*
 		Categoria cat = new Categoria();
 		cat.setIdCategoria(idCategoria);
-		
+
 		articulo.setTipo(cat);
-		*/
+		 */
 		Stock stock = new Stock();
 
 		stock.setCantidad(cantidad);
@@ -112,9 +112,9 @@ public class ControladorDeposito {
 	private Stock obtenerStock(int idArticulo) {
 		return dep.buscarStock(idArticulo);
 	}
-	
+
 	public List<SolicitudDePedidoVO> obtenerSolicitudesDePedidoEnEstado(EnumSolicitudDePedidoVO estado){
-		
+
 		EnumSolicitudDePedido enumP;
 		switch (estado) {
 		case ENTREGADO:
@@ -129,9 +129,9 @@ public class ControladorDeposito {
 		default:
 			enumP = EnumSolicitudDePedido.PENDIENTE;
 			break;
-			
+
 		}
-		
+
 		List<SolicitudDePedido> miLista = dep.obtenerSolicitudesDePedidoEnEstado(enumP);
 		List<SolicitudDePedidoVO> miListaVOs = new ArrayList<SolicitudDePedidoVO>();
 		for (SolicitudDePedido solpe : miLista) {
@@ -149,7 +149,7 @@ public class ControladorDeposito {
 			}
 			solpeVO.setFecha(solpe.getFecha());
 			solpeVO.setIdSolicitudDePedido(solpe.getIdSolicitudDePedido());
-			
+
 			List<ItemPedido> itemsPedido = solpe.getItemsPedido();
 			List<ItemPedidoVO> itemsPedidoVO = new ArrayList<ItemPedidoVO>();
 			for (ItemPedido itemPedido : itemsPedido) {
@@ -175,13 +175,15 @@ public class ControladorDeposito {
 				itemPedidoVO.setIdItemPedido(itemPedido.getIdItemPedido());
 				itemsPedidoVO.add(itemPedidoVO);
 			}
-				
+//TODO FER
 			solpeVO.setItemsPedido(itemsPedidoVO);
 			PedidoVO pedidoVO = new PedidoVO();
+			pedidoVO.setItemsPedidosAFabrica(itemsPedidoVO);
 			//pedidoVO.s
 			solpeVO.setPedido(pedidoVO);
+			miListaVOs.add(solpeVO);
 		}
-		
+
 		return miListaVOs;
 	}
 	public void nuevaSolicitudPedido(SolicitudArticuloDTO solicitud) {		
@@ -190,12 +192,12 @@ public class ControladorDeposito {
 		solPe.setEstado(EnumSolicitudDePedido.PENDIENTE);
 		solPe.setIdDespacho(solicitud.getIdDespacho());
 		solPe.setIdSolicitudArticulo(solicitud.getIdSolicitudArticulo());
-		
+
 		List<ItemSolicitudArticuloDTO> itemsSolicitudDTO = solicitud.getItems();
 		List<ItemPedido> itemsSolicitud = new LinkedList<ItemPedido>();
-		
+
 		Iterator<ItemSolicitudArticuloDTO> it = itemsSolicitudDTO.iterator();
-		
+
 		while (it.hasNext()){
 			ItemSolicitudArticuloDTO unItemDTO = it.next();
 			ItemPedido unItem = new ItemPedido();
@@ -204,7 +206,7 @@ public class ControladorDeposito {
 			unItem.setEstado(EnumEstadoItemPedido.PENDIENTE);
 			itemsSolicitud.add(unItem);
 		}
-		
+
 		solPe.setItemsPedido(itemsSolicitud);
 		dep.nuevaSolicitudPedido(solPe);
 	}
@@ -212,7 +214,7 @@ public class ControladorDeposito {
 		List<CategoriaVO> categoriasVO = new LinkedList<>();
 		List<Categoria> categorias = dep.obtenerCategorias();
 		Iterator<Categoria> it = categorias.iterator();
-		
+
 		while (it.hasNext()) {
 			Categoria categoria = it.next();
 			CategoriaVO categoriaVO = new CategoriaVO();
@@ -222,15 +224,15 @@ public class ControladorDeposito {
 		}
 		return categoriasVO;
 	}
-	
+
 	public void registrarRecepcionArticulosFabrica (PedidoFabricaDTO pedido) {
 		List<ItemsPedidoFabricaDTO> items = pedido.getItems();
 		Iterator<ItemsPedidoFabricaDTO> it = items.iterator();
-		
+
 		while (it.hasNext()) {
 			ItemsPedidoFabricaDTO item = it.next();
 			Stock stockArticulo = dep.buscarStock(item.getIdArticulo());
-			
+
 			int nuevoStock = stockArticulo.getCantidad() + item.getCantidad();
 			dep.actualizarStockArticulo(stockArticulo.getIdStock(), nuevoStock);
 		}
@@ -268,8 +270,27 @@ public class ControladorDeposito {
 			itemsPedidosAFabrica.add(item);
 		}
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
-		
+
 		ped.grabarPedido(pedido);
 		return pedido.getIdPedido();
 	}
+	public List<SolicitudDePedidoVO> listarPedidosPendientes() {
+		EnumSolicitudDePedido estado =EnumSolicitudDePedido.PENDIENTE;
+		List<SolicitudDePedido> solicitudes = dep.obtenerSolicitudesPedidoEnEstado(estado);
+		List<SolicitudDePedidoVO> solicitudesVO = new LinkedList<SolicitudDePedidoVO>();
+		Iterator<SolicitudDePedido> it = solicitudes.iterator();
+
+
+		while (it.hasNext()) {
+			SolicitudDePedido solicitud = it.next();
+			SolicitudDePedidoVO solicitudVO = new SolicitudDePedidoVO();
+			solicitudVO.setIdSolicitudDePedido(solicitud.getIdSolicitudDePedido());
+			solicitudVO.setFecha(solicitud.getFecha());
+			solicitudVO.setItemsPedido(null);
+			solicitudesVO.add(solicitudVO);
+
+		}
+		return solicitudesVO;
+	}
+
 }

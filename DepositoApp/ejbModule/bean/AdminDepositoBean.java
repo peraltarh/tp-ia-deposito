@@ -8,7 +8,9 @@ import javax.ejb.Stateless;
 
 import modelo.Articulo;
 import modelo.Categoria;
+import modelo.EnumEstadoPedido;
 import modelo.EnumSolicitudDePedido;
+import modelo.Pedido;
 import modelo.SolicitudDePedido;
 import modelo.Stock;
 
@@ -56,6 +58,10 @@ public class AdminDepositoBean {
 
 	public void actualizarFechaRecepcionPedido(int idSolicitudCompra, Date fechaRecepcion) {
 		adminPedido.actualizarFechaRecepcionPedido(idSolicitudCompra,fechaRecepcion);	
+	}
+	
+	public List<SolicitudDePedido> obtenerSolicitudesPedidoEnEstado (EnumSolicitudDePedido estado){
+		return adminSolPe.obtenerSolicitudesPedidoEnEstado(estado);
 	}
 
 }
