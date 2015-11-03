@@ -18,7 +18,7 @@ import vo.SolicitudDePedidoVO;
 /**
  * Servlet implementation class ListarSolicitudesPedidosPendientes
  */
-@WebServlet("/ListarSolicitudesPedidosPendientes")
+@WebServlet("/ListarDetalleSolPe")
 public class ListarDetalleSolPe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -42,7 +42,7 @@ public class ListarDetalleSolPe extends HttpServlet {
 
 		int idSolPe = Integer.parseInt(request.getParameter("filtro"));
 		
-		controladorDep.buscarSolicitud(idSolPe);
+//		controladorDep.buscarSolicitud(idSolPe);
 //VIEJO		
 //		
 //		List<SolicitudDePedidoVO> solicitudes = controladorDep.listarPedidosPendientes();
