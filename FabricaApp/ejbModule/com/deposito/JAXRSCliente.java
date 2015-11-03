@@ -16,6 +16,8 @@ import com.deposito.bean.ArticuloRESTBean;
 import com.deposito.bean.CategoriaRESTBean;
 import com.deposito.bean.ItemPedidoRESTBean;
 import com.deposito.bean.PedidoRESTBean;
+
+import modelo.EnumEstadoPedido;
 import modelo.ItemPedido;
 import modelo.Pedido;
 
@@ -25,45 +27,45 @@ public class JAXRSCliente {
 
 	public static void main(String[] args) throws Exception {
     	
-		//Ver https://docs.oracle.com/javaee/6/tutorial/doc/gkoib.html
-		
-    	PedidoRESTBean pe = new PedidoRESTBean();
+
+//    	PedidoRESTBean pe = new PedidoRESTBean();
+//    	
+//    	pe.setIdPedido(0);
+//    	pe.setFechaRecepcion(GregorianCalendar.getInstance().getTime());
+//    	pe.setFechaSolicitud(GregorianCalendar.getInstance().getTime());
+//    	List<ItemPedidoRESTBean> items = new ArrayList<ItemPedidoRESTBean>();
+//    	pe.setItemsPedidosAFabrica(items);
     	
+    	Pedido pe = new Pedido();
     	pe.setIdPedido(0);
     	pe.setFechaRecepcion(GregorianCalendar.getInstance().getTime());
     	pe.setFechaSolicitud(GregorianCalendar.getInstance().getTime());
-    	List<ItemPedidoRESTBean> items = new ArrayList<ItemPedidoRESTBean>();
+    	List<ItemPedido> items = new ArrayList<ItemPedido>();
     	pe.setItemsPedidosAFabrica(items);
-        
-        
-    	// JSON POST
-        URL url = new URL("http://localhost:8080/FabricaWeb/rest/service/crearPedido");
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-		urlConnection.setDoOutput(true);
-		urlConnection.setRequestMethod("POST");
-		urlConnection.setRequestProperty("Content-Type", "application/json");
-
-    	java.io.StringWriter sw = new StringWriter();
+//    	pe.setEstado(EnumEstadoPedido.PENDIENTE);
+//        
+//        
+//    	// JSON POST
+//        URL url = new URL("http://localhost:8080/FabricaWeb/rest/service/crearPedido");
+//        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//		urlConnection.setDoOutput(true);
+//		urlConnection.setRequestMethod("POST");
+//		urlConnection.setRequestProperty("Content-Type", "application/json");
+//
+//
+//		
+//		ObjectMapper mapper = new ObjectMapper();
+//		mapper.writeValue(urlConnection.getOutputStream(), pe);
+//
+//		String response = IOUtils.toString(urlConnection.getInputStream());
 		
-		JAXBContext jc;
-
-		try {
-			jc = JAXBContext.newInstance(PedidoRESTBean.class);
-			Marshaller m = jc.createMarshaller();
-			m.marshal(pe, sw);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
+    	String response = enviarPedidoAFabrica(pe);
 		
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(urlConnection.getOutputStream(), pe);
-
-		String response = IOUtils.toString(urlConnection.getInputStream());
 		System.out.println("Respuesta: " + response);
 	}
     
 	
-	public String enviarPedidoAFabrica (Pedido pedido){
+	public static String enviarPedidoAFabrica (Pedido pedido){
 		
 		
 		PedidoRESTBean pe = new PedidoRESTBean();

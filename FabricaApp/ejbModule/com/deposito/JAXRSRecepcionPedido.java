@@ -1,10 +1,15 @@
 package com.deposito;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 
 
@@ -18,12 +23,14 @@ import modelo.EnumEstadoPedido;
 import modelo.ItemPedido;
 import modelo.Pedido;
 
-
+@RequestScoped
 @Path("/service")
-public class JAXRSRecepcionPedido {
+public class JAXRSRecepcionPedido implements Serializable{
 	
-	@EJB
-	ControladorFabrica contFabrica;
+
+	private static final long serialVersionUID = 1L;
+	@Inject
+	private ControladorFabrica contFabrica;
 	
 	@GET
     @Path("/hola")

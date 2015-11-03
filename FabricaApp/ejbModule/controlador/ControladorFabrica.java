@@ -3,14 +3,17 @@ package controlador;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Singleton;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
+
 import bean.AdminFabricaBean;
 import modelo.EnumEstadoPedido;
 import modelo.Pedido;
 import vo.EnumEstadoPedidoVO;
 import vo.PedidoVO;
 
-@Stateful
+@Stateless
 public class ControladorFabrica {
 	private List<Pedido> pedidos;
 
