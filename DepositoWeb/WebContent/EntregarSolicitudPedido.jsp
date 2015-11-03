@@ -40,11 +40,6 @@ function realizaProceso(){
 <br>
 	<table>
 		<tr>
-			<td><label for="idPedido">idPedido:</label></td>
-			<td><input type="text" class="form-control" id="filtro">
-			</td>
-		</tr>
-		<tr>
 			<td>
 				<button type="submit" class="btn btn-default"
 					onclick="realizaProceso();">Ver Detalle</button>

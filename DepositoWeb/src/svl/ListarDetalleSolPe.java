@@ -1,6 +1,7 @@
 package svl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import controlador.ControladorDeposito;
 import vo.PedidoVO;
 import vo.SolicitudDePedidoVO;
+import vo.ItemPedidoVO;
 
 /**
  * Servlet implementation class ListarSolicitudesPedidosPendientes
@@ -40,17 +42,22 @@ public class ListarDetalleSolPe extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int idSolPe = Integer.parseInt(request.getParameter("filtro"));
+		int idSolPe = Integer.parseInt(request.getParameter("idSolicitud"));
 		
-//		controladorDep.buscarSolicitud(idSolPe);
-//VIEJO		
-//		
-//		List<SolicitudDePedidoVO> solicitudes = controladorDep.listarPedidosPendientes();
-//		
-//		request.setAttribute("listadoSolicitudesPedidosPendientes", solicitudes);
-//
-//		RequestDispatcher rd = request.getRequestDispatcher("listadoSolicitudesPedidosPendientes.jsp");
-//		rd.forward(request, response);
+		SolicitudDePedidoVO solPeVO= controladorDep.buscarSolicitud(idSolPe);
+		ArrayList<ItemPedidoVO> itemsVO = new ArrayList<ItemPedidoVO>();
+		ArrayList<Integer> cantidadesStock = new ArrayList<Integer>();
+		for(ItemPedidoVO itemVO : itemsVO)
+		{
+			int cant = 0;
+			cant=controladorDep.getStockArticulo(itemVO.getArticulo().getIdArticulo());
+			cantidadesStock.add(cant);
+		}
+		request.setAttribute("solicitudVO", solPeVO);
+		request.setAttribute("cantidadesStock", cantidadesStock);
+
+		RequestDispatcher rd = request.getRequestDispatcher("listadoDetalleSolPe.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

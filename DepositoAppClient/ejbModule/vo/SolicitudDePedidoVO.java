@@ -51,5 +51,9 @@ public class SolicitudDePedidoVO {
 		this.pedido = pedido;
 	}
 
+	public void addItemPedidoVO (ItemPedidoVO itemVO)
+	{
+		this.itemsPedido.add(itemVO);
+	}
 }
 

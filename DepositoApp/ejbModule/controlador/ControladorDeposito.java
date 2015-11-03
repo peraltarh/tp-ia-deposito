@@ -175,7 +175,7 @@ public class ControladorDeposito {
 				itemPedidoVO.setIdItemPedido(itemPedido.getIdItemPedido());
 				itemsPedidoVO.add(itemPedidoVO);
 			}
-//TODO FER
+			//TODO FER
 			solpeVO.setItemsPedido(itemsPedidoVO);
 			PedidoVO pedidoVO = new PedidoVO();
 			pedidoVO.setItemsPedidosAFabrica(itemsPedidoVO);
@@ -291,6 +291,39 @@ public class ControladorDeposito {
 
 		}
 		return solicitudesVO;
+	}
+
+	public SolicitudDePedidoVO buscarSolicitud(int idSolPe) {
+		SolicitudDePedidoVO solPeVO = new SolicitudDePedidoVO();
+		SolicitudDePedido solPe=dep.buscarSolPe(idSolPe);
+
+		solPeVO.setFecha(solPe.getFecha());
+		solPeVO.setIdSolicitudDePedido(idSolPe);
+		solPeVO.setItemsPedido(new ArrayList<ItemPedidoVO>());
+		for( ItemPedido item : solPe.getItemsPedido() )
+		{
+			ItemPedidoVO itemVO = new ItemPedidoVO();
+			itemVO.setIdItemPedido(item.getIdItemPedido());
+			itemVO.setCantidad(item.getCantidad());
+
+			ArticuloVO artVO = new ArticuloVO();
+
+			artVO.setDescripcion(item.getArticulo().getDescripcion());
+			artVO.setIdArticulo(item.getArticulo().getIdArticulo());
+
+			itemVO.setArticulo(artVO);
+
+			solPeVO.addItemPedidoVO(itemVO);
+		}
+
+
+		return solPeVO;
+
+	}
+
+	public int getStockArticulo(int idArticulo) {
+		Stock stock= dep.buscarStock(idArticulo);
+		return stock.getCantidad();
 	}
 
 }

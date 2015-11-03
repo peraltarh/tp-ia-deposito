@@ -64,4 +64,9 @@ public class AdminDepositoBean {
 		return adminSolPe.obtenerSolicitudesPedidoEnEstado(estado);
 	}
 
+	public SolicitudDePedido buscarSolPe(int idSolPe) {
+		return adminSolPe.buscarSolPe(idSolPe);
+
+	}
+
 }
