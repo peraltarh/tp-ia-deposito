@@ -18,9 +18,9 @@
   <table class="table table-bordered">
 		<thead>
 			<tr>
-				<th><a>ID Pedido</a></th>
-				<th><a>Estado</a></th>
-				<th><a>Seleccionar</a></th>
+				<th>ID Pedido</th>
+				<th>Estado</th>
+				<th>Seleccionar</th>
 			</tr>
 		</thead>
   	<tbody>  
@@ -32,7 +32,7 @@
 				<tr>		
 					<td> <%=unPedido.getIdPedido()%> </td>
 					<td> <%=unPedido.getEstado()%> </td>
-					<td>seleccionar</td>								
+					<td><a>seleccionar</a></td>								
 				</tr>
 		  	<%}%>
 	  	</tbody>
