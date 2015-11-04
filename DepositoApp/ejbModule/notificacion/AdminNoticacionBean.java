@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -14,8 +15,6 @@ import javax.xml.bind.Marshaller;
 
 import bean.AdminConfiguracionBean;
 import configuracion.Configuracion;
-import configuracion.ConfiguracionAsincronica;
-import configuracion.ConfiguracionSincronica;
 import dto.ArticuloDTO;
 import modelo.Articulo;
 import wsLM.LogDTO;
@@ -27,13 +26,16 @@ public class AdminNoticacionBean {
 
 	@EJB
 	private AdminConfiguracionBean adm;
-
+	private static Logger logger = Logger.getLogger(AdminNoticacionBean.class.getName());
+	
 	public void informarArticulo(Articulo articulo, String tipoModulo) {
 
 		this.gruposAnotificar = adm.buscarConfiguracionAsincronica(tipoModulo);
 
 		Iterator<Configuracion> it = gruposAnotificar.iterator();
 		String notificacion = obtenerArticuloXML(articulo);
+		
+		logger.info("Notificación Asíncrona Portal/Despacho: " + notificacion);
 
 		while (it.hasNext()) {
 			Configuracion unaConfiguracion = it.next();
@@ -82,9 +84,11 @@ public class AdminNoticacionBean {
 		Iterator<Configuracion> itAsync = gruposAnotificar.iterator();
 		
 		String idModulo = "DEP-G12";
-		String mensaje = "Articulo creado: Id " + articulo.getIdArticulo() + "Nombre:" + articulo.getNombre();
+		String mensaje = "Articulo creado: Id " + articulo.getIdArticulo() + " Nombre: " + articulo.getNombre();
 		String notificacion = idModulo + "_" + mensaje;
-				
+		
+		logger.info("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
+		
 		while (itAsync.hasNext()) {
 			Configuracion unaConfiguracion = itAsync.next();
 			unaConfiguracion.notificar(notificacion);
@@ -101,6 +105,8 @@ public class AdminNoticacionBean {
 		detalle.setIdModulo(idModulo);
 		detalle.setMensaje(mensaje);
 		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
+		
+		logger.info("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
 		
 		while (itSync.hasNext()) {
 			Configuracion unaConfiguracion = itSync.next();

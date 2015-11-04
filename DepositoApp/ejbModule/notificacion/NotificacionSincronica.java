@@ -27,15 +27,6 @@ public class NotificacionSincronica {
 
 	@SuppressWarnings("unused")
 	public void notificar(String notificacion) {
-		try {
-			System.out.println("XML " + notificacion);
-			// Le paso la url dinamica de la ubicacion del wsdl
-			LogisticaMonitoreoWS port = new LogisticaMonitoreoBeanService(url).getLogisticaMonitoreoWSPort();
-			String respuesta = port.informarLog(notificacion);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 	

@@ -1,5 +1,7 @@
 package mdb;
 
+import java.util.logging.Logger;
+
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
@@ -25,6 +27,7 @@ import dto.SolicitudArticuloDTO;
 public class SolicitudPedidoMDB implements MessageListener {
 	@EJB
 	private ControladorDeposito dep;
+	private static Logger logger = Logger.getLogger(SolicitudPedidoMDB.class.getName());
 
     /**
      * Default constructor. 
@@ -40,8 +43,9 @@ public class SolicitudPedidoMDB implements MessageListener {
     	String solicitudArticuloJSON = null;
 		try {
 			solicitudArticuloJSON = ((TextMessage)message).getText();
+			logger.info("Recepcion Solicitud Articulos JSON recibido : " + solicitudArticuloJSON);
 		} catch (JMSException e) {
-			// TODO Auto-generated catch block
+			logger.info("Error al obtener JSON Artículo desde Despacho ");
 			e.printStackTrace();
 		}
     	
@@ -49,8 +53,6 @@ public class SolicitudPedidoMDB implements MessageListener {
 
     	SolicitudArticuloDTO solicitud = gson.fromJson(solicitudArticuloJSON, SolicitudArticuloDTO.class);
     	    	
-    	
-    	//System.out.println("Despacho "+ jsonToObject.getIdDespacho());
     	dep.nuevaSolicitudPedido(solicitud);
         
     }

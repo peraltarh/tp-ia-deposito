@@ -1,6 +1,7 @@
 package notificacion;
 
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -20,6 +21,7 @@ public class NotificacionAsincronica {
 	private Queue remoteQueue;
 	private Connection remoteQueueConnection;
 	private Session remoteQueueSession;
+	private static Logger logger = Logger.getLogger(NotificacionAsincronica.class.getName());
 
 	public NotificacionAsincronica(Configuracion configuracion) {
 		Properties props = new Properties();
@@ -37,7 +39,7 @@ public class NotificacionAsincronica {
 			// remoteQueue = (Queue) ic.lookup("jms/queues/LocalServer1Q");
 			remoteQueue = (Queue) ic.lookup(configuracion.getRecurso());
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
+			logger.info("Error al hacer lkp a la queue. " + "Url: " + configuracion.getUrl() + " Recurso: " + configuracion.getRecurso());
 			e.printStackTrace();
 		}
 
@@ -46,7 +48,7 @@ public class NotificacionAsincronica {
 			remoteQueueConnection.start();
 			remoteQueueSession = remoteQueueConnection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		} catch (JMSException e) {
-			// TODO Auto-generated catch block
+			logger.info("Error al crear session");
 			e.printStackTrace();
 		}
 
@@ -54,17 +56,16 @@ public class NotificacionAsincronica {
 
 	public void notificar(String notificacion) {
 		try {
-			System.out.println("XML " + notificacion);
 			TextMessage txtMessage = remoteQueueSession.createTextMessage(notificacion);
 			MessageProducer msgProducer = remoteQueueSession.createProducer(this.remoteQueue);
 			msgProducer.send(txtMessage);
 			msgProducer.close();
 			finalize();
 		} catch (JMSException e) {
-			// TODO Auto-generated catch block
+			logger.severe("Error al enviar mensaje");
 			e.printStackTrace();
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
+			logger.severe("Error al enviar mensaje");
 			e.printStackTrace();
 		}
 
