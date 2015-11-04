@@ -39,6 +39,7 @@
 	</script>  
 
 <h1>DEPOSITO</h1>
+<a href="index.jsp">Indice</a>
 <a href="IngresoCrearArticuloSVL">Crear nuevo Artículo</a>
 <a href="busquedaArticulos.jsp">Buscar Artículo</a>
 
