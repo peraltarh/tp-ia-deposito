@@ -4,8 +4,10 @@ package configuracion;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+
 import notificacion.NotificacionSincronica;
-import wsLM.LogDTO;
+import ws.LogDTO;
+
 
 @Entity
 @DiscriminatorValue("sync")
@@ -26,6 +28,5 @@ public class ConfiguracionSincronica extends Configuracion {
 		NotificacionSincronica notificacion = new NotificacionSincronica(this);
 		notificacion.notificarLog(detalle);
 	}
-	
 
 }

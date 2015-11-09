@@ -13,11 +13,14 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+
+
 import bean.AdminConfiguracionBean;
 import configuracion.Configuracion;
 import dto.ArticuloDTO;
 import modelo.Articulo;
-import wsLM.LogDTO;
+import ws.LogDTO;
+
 
 @Stateless
 public class AdminNoticacionBean {

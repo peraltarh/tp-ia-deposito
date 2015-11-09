@@ -4,7 +4,10 @@ package configuracion;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+
 import notificacion.NotificacionAsincronica;
+import ws.LogDTO;
+
 
 @Entity
 @DiscriminatorValue("async")
@@ -19,6 +22,12 @@ public class ConfiguracionAsincronica extends Configuracion {
 	public void notificar(String mensaje) {
 		NotificacionAsincronica  notificacion = new NotificacionAsincronica(this);
 		notificacion.notificar(mensaje);
+	}
+
+	@Override
+	public void notificarLog(LogDTO detalle) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

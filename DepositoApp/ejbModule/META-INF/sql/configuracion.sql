@@ -19,18 +19,18 @@ INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipo
 
 -- Envio log de creacion de Articulo a Monitor
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (11,'MON-G01','IP_A_DEFINIR:8080','MonitoreoWEB/WSInformeAuditoriaBean', NULL,'sync','n');
-INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (12,'MON-G03','IP_A_DEFINIR:8080','MonitoreoWEB/WSInformeAuditoriaBean', NULL,'sync','n');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (12,'MON-G03','172.16.161.7:8080','MonitoreoEJB/WSInformeAuditoriaBean', NULL,'sync','n');
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (13,'MON-G13','IP_A_DEFINIR:8080','MonitoreoWEB/WSInformeAuditoriaBean', NULL,'sync','n');
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (14,'MON-G16','IP_A_DEFINIR:8080','MonitoreoWEB/WSInformeAuditoriaBean', NULL,'sync','n');
 
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (15,'MON-G01','IP_A_DEFINIR:8080','jms/queue/MonitorQueue', NULL,'async','n');
-INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (16,'MON-G03','IP_A_DEFINIR:8080','jms/queue/MonitorQueue', NULL,'async','n');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (16,'MON-G03','172.16.161.7:8080','jms/queue/MonitorQueue', NULL,'async','n');
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (17,'MON-G13','IP_A_DEFINIR:8080','jms/queue/MonitorQueue', NULL,'async','n');
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (18,'MON-G16','IP_A_DEFINIR:8080','jms/queue/MonitorQueue', NULL,'async','n');
 --
 
 -- Test
-INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (99999,'MON-G01','localhost:8080','jms/queues/LocalServer1Q', NULL,'async','s');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (99999,'MON-G01','localhost:8080','jms/queues/LocalServer1Q', NULL,'async','n');
 --INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (1,'DES-G01','172.16.165.28:8080','jms/queue/RecepcionArticulosDeposito', NULL,'async','n');
 -- INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso) VALUES (1,'DES-G01','192.168.43.76:8080','jms/queue/RecepcionArticulosDeposito', NULL,'async');
 --INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (2,'MON-G01','localhost:8080','CreateWS/LogLM', NULL,'sync','n');
@@ -38,7 +38,7 @@ INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipo
 --INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (1,'DES-G01','localhost:8080','jms/queues/LocalServer1Q', NULL,'async','s');
 
 
-
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (888888,'MON-G03','localhost:8080','TestWebMethod/WSInformeAuditoriaBean', NULL,'sync','s');
 
 
 

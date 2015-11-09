@@ -12,14 +12,17 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import notificacion.NotificacionSincronica;
-import wsLM.LogDTO;
+
+
+
+import ws.LogDTO;
+
 
 @Entity
 @Table(name = "configuracion")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipoRecurso", discriminatorType = DiscriminatorType.STRING)
-public class Configuracion implements Serializable {
+public abstract class Configuracion implements Serializable {
 	/**
 	 * 
 	 */
@@ -75,14 +78,9 @@ public class Configuracion implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public void notificar(String notificacion) {
-		// TODO Auto-generated method stub
-
-	}
+	public abstract void notificar(String notificacion);
 	
-	public void notificarLog(LogDTO detalle) {
-		
-	}
+	public abstract void notificarLog(LogDTO detalle);
 
 	public String getActivo() {
 		return activo;

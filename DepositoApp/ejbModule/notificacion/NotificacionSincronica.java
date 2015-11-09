@@ -1,12 +1,13 @@
 package notificacion;
 
 import java.net.URL;
+
+
+
 import configuracion.Configuracion;
-import wsLM.LogDTO;
-import wsLM.WSInformeAuditoriaBean;
-import wsLM.WSInformeAuditoriaBeanService;
-import ws.LogisticaMonitoreoBeanService;
-import ws.LogisticaMonitoreoWS;
+import ws.LogDTO;
+import ws.WSInformeAuditoriaBean;
+import ws.WSInformeAuditoriaBeanService;
 
 public class NotificacionSincronica {
 	private URL url;
@@ -31,8 +32,13 @@ public class NotificacionSincronica {
 	}
 	
 	public void notificarLog(LogDTO detalle) {
-		WSInformeAuditoriaBean port = new WSInformeAuditoriaBeanService(url).getWSInformeAuditoriaBeanPort();
-		port.agregarInforme(detalle);
+		WSInformeAuditoriaBean port  = new WSInformeAuditoriaBeanService(url).getWSInformeAuditoriaBeanPort();
+		boolean salida = port.agregarInforme(detalle);
+		if (salida) {
+			System.out.println("Verdadero");
+		} else {
+			System.out.println("Falso");
+		}
 	} 
 
 }
