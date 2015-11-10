@@ -20,6 +20,7 @@
 	  <thead>
 		  <tr>
 		  	<th>Nombre</th>
+		  	<th>Codigo</th>
 		  	<th>Descripción</th>
 		  	<th>Marca</th>
 		  	<th>Origen</th>
@@ -36,6 +37,7 @@
 		  	%>			
 				<tr>		
 					<td> <%=unArticulo.getNombre()%> </td>
+					<td> <%=unArticulo.getCodigoArticulo()%> </td>
 					<td> <%=unArticulo.getDescripcion()%> </td>
 					<td> <%=unArticulo.getMarca()%> </td>
 					<td> <%=unArticulo.getOrigen()%> </td>

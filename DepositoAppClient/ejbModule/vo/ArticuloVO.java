@@ -16,6 +16,7 @@ public class ArticuloVO {
 	private CategoriaVO categoria;
 	private int idStock;
 	private int stock;
+	private int codigoArticulo;
 
 	public int getIdArticulo() {
 		return idArticulo;
@@ -111,6 +112,14 @@ public class ArticuloVO {
 
 	public void setIdStock(int idStock) {
 		this.idStock = idStock;
+	}
+
+	public int getCodigoArticulo() {
+		return codigoArticulo;
+	}
+
+	public void setCodigoArticulo(int codigoArticulo) {
+		this.codigoArticulo = codigoArticulo;
 	}
 
 }

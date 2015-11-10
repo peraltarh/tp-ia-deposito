@@ -50,11 +50,12 @@ public class ControladorDeposito {
 	@EJB
 	AdminNoticacionBean notificacion;
 
-	public void nuevoArticulo(String nombre, String descripcion, String marca, int precio, String url, String origen,
+	public void nuevoArticulo(String nombre, int codigo, String descripcion, String marca, int precio, String url, String origen,
 			String ficha, long idCategoria, int cantidad) {
 		Articulo articulo = new Articulo();
 
 		articulo.setNombre(nombre);
+		articulo.setCodArticulo(codigo);
 		articulo.setDescripcion(descripcion);
 		articulo.setMarca(marca);
 		articulo.setPrecio(precio);
@@ -62,12 +63,7 @@ public class ControladorDeposito {
 		articulo.setOrigen(origen);
 		articulo.setFichaTecnica(ficha);
 		articulo.setFechaAlta(new Date());
-		/*
-		Categoria cat = new Categoria();
-		cat.setIdCategoria(idCategoria);
 
-		articulo.setTipo(cat);
-		 */
 		Stock stock = new Stock();
 
 		stock.setCantidad(cantidad);
@@ -76,7 +72,7 @@ public class ControladorDeposito {
 		dep.nuevoArticulo(articulo, stock,idCategoria);
 
 		notificacion.informarArticulo(articulo, "DES");
-		// notificacion.informarArticulo(articulo, "DEP");
+		notificacion.informarArticulo(articulo, "DEP");
 		notificacion.informarArticuloLM(articulo);
 
 	}
@@ -94,6 +90,7 @@ public class ControladorDeposito {
 			Articulo unArticulo = it.next();
 			ArticuloVO unArticuloVO = new ArticuloVO();
 			unArticuloVO.setIdArticulo(unArticulo.getIdArticulo());
+			unArticuloVO.setCodigoArticulo(unArticulo.getCodArticulo());
 			unArticuloVO.setDescripcion(unArticulo.getDescripcion());
 			unArticuloVO.setNombre(unArticulo.getNombre());
 			unArticuloVO.setPrecio(unArticulo.getPrecio());

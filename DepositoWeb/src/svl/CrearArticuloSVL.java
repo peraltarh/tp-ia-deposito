@@ -36,6 +36,7 @@ public class CrearArticuloSVL extends HttpServlet {
 			throws ServletException, IOException {
 
 		String nombre = (String) request.getParameter("nombre");
+		int codigo = Integer.parseInt(request.getParameter("codigo"));
 		String descripcion = (String) request.getParameter("descripcion");
 		String marca = (String) request.getParameter("marca");
 		int precio = Integer.parseInt(request.getParameter("precio"));
@@ -45,7 +46,7 @@ public class CrearArticuloSVL extends HttpServlet {
 		int categoria = Integer.parseInt(request.getParameter("categoria"));
 		int cantidad= Integer.parseInt(request.getParameter("cantidad"));
 
-		controladorDep.nuevoArticulo(nombre,descripcion,marca,precio,url,origen,ficha,categoria,cantidad);
+		controladorDep.nuevoArticulo(nombre,codigo,descripcion,marca,precio,url,origen,ficha,categoria,cantidad);
 		response.getWriter().println("Articulo creado con exito");;
 		
 

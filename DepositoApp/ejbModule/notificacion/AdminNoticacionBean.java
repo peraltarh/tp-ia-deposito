@@ -57,7 +57,7 @@ public class AdminNoticacionBean {
 		
 		articuloDTO.setFechaAlta(fecha);
 		articuloDTO.setFichaTecnica(articulo.getFichaTecnica());
-		articuloDTO.setIdArticulo(articulo.getIdArticulo());
+		articuloDTO.setIdArticulo(articulo.getCodArticulo());
 		articuloDTO.setIdDeposito("DEP-G12");
 		articuloDTO.setMarca(articulo.getMarca());
 		articuloDTO.setNombre(articulo.getNombre());
@@ -87,7 +87,7 @@ public class AdminNoticacionBean {
 		Iterator<Configuracion> itAsync = gruposAnotificar.iterator();
 		
 		String idModulo = "DEP-G12";
-		String mensaje = "Articulo creado: Id " + articulo.getIdArticulo() + " Nombre: " + articulo.getNombre();
+		String mensaje = "Articulo creado: Codigo " + articulo.getCodArticulo() + " Nombre: " + articulo.getNombre();
 		String notificacion = idModulo + "_" + mensaje;
 		
 		logger.info("Notificación Asíncrona LM: " + "Mensaje " + notificacion);

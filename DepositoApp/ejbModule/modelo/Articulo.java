@@ -30,6 +30,7 @@ public class Articulo implements Serializable {
 	private String descripcion;
 	private float precio;
 	private Date fechaAlta;
+	private int codArticulo;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idCategoria")
@@ -113,6 +114,14 @@ public class Articulo implements Serializable {
 
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
+	}
+
+	public int getCodArticulo() {
+		return codArticulo;
+	}
+
+	public void setCodArticulo(int codArticulo) {
+		this.codArticulo = codArticulo;
 	}
 
 }

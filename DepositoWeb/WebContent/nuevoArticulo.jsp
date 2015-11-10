@@ -17,6 +17,7 @@
 	        $.ajax({	               
 	        	   data: ({
 	        		   	  nombre : $("#nombre").val(),
+	        		   	  codigo : $("#codigo").val(),
 	          	          descripcion : $("#descripcion").val(),
 	        	          marca : $("#marca").val(),
 	        	          precio : $("#precio").val(),
@@ -51,6 +52,11 @@
 			<td><input type="text" class="form-control" id="nombre">
 			</td>
 		</tr>
+		<tr>
+			<td><label for="codigo">Codigo:</label></td>
+			<td><input type="text" class="form-control" id="codigo">
+			</td>
+		</tr>		
 		<tr>
 			<td><label for="descripcion">Descripción:</label></td>
 			<td><input type="text" class="form-control" id="descripcion">
