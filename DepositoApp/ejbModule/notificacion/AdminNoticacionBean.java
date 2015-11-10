@@ -13,13 +13,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-
+import com.monitor.webservice.LogDTO;
 
 import bean.AdminConfiguracionBean;
 import configuracion.Configuracion;
 import dto.ArticuloDTO;
 import modelo.Articulo;
-import ws.LogDTO;
+
 
 
 @Stateless

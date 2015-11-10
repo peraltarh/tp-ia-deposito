@@ -12,10 +12,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import com.monitor.webservice.LogDTO;
 
 
 
-import ws.LogDTO;
 
 
 @Entity

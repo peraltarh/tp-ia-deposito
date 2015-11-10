@@ -1,20 +1,20 @@
 package notificacion;
 
-import java.net.URL;
+import javax.xml.ws.BindingProvider;
 
-
+import com.monitor.webservice.LogDTO;
+import com.monitor.webservice.WSInformeAuditoriaBean;
+import com.monitor.webservice.WSInformeAuditoriaBeanService;
 
 import configuracion.Configuracion;
-import ws.LogDTO;
-import ws.WSInformeAuditoriaBean;
-import ws.WSInformeAuditoriaBeanService;
+
 
 public class NotificacionSincronica {
-	private URL url;
+	private String url;
 
 	public NotificacionSincronica(Configuracion configuracion) {
 		try {
-			url = new URL("http://"+configuracion.getUrl() + "/" + configuracion.getRecurso() + "?wsdl");
+			url = "http://"+configuracion.getUrl() + "/" + configuracion.getRecurso();
 
 		} catch (
 
@@ -32,13 +32,14 @@ public class NotificacionSincronica {
 	}
 	
 	public void notificarLog(LogDTO detalle) {
-		WSInformeAuditoriaBean port  = new WSInformeAuditoriaBeanService(url).getWSInformeAuditoriaBeanPort();
-		boolean salida = port.agregarInforme(detalle);
-		if (salida) {
-			System.out.println("Verdadero");
-		} else {
-			System.out.println("Falso");
-		}
+		WSInformeAuditoriaBeanService service = new WSInformeAuditoriaBeanService();
+		WSInformeAuditoriaBean port = service.getWSInformeAuditoriaBeanPort();
+					
+		BindingProvider bindingProvider = (BindingProvider) port;
+		bindingProvider.getRequestContext().put(
+		      BindingProvider.ENDPOINT_ADDRESS_PROPERTY, url);
+		    
+		port.agregarInforme(detalle);
 	} 
 
 }

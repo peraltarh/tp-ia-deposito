@@ -4,9 +4,10 @@ package configuracion;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import com.monitor.webservice.LogDTO;
 
 import notificacion.NotificacionSincronica;
-import ws.LogDTO;
+
 
 
 @Entity

@@ -1,5 +1,5 @@
 
-package ws;
+package com.monitor.webservice;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the ws package. 
+ * generated in the com.monitor.webservice package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -24,11 +24,12 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _AgregarInforme_QNAME = new QName("http://ws/", "agregarInforme");
-    private final static QName _AgregarInformeResponse_QNAME = new QName("http://ws/", "agregarInformeResponse");
+    private final static QName _AgregarInforme_QNAME = new QName("http://webService.monitor.com/", "agregarInforme");
+    private final static QName _AgregarInformeResponse_QNAME = new QName("http://webService.monitor.com/", "agregarInformeResponse");
+    private final static QName _Log_QNAME = new QName("http://webService.monitor.com/", "log");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ws
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.monitor.webservice
      * 
      */
     public ObjectFactory() {
@@ -62,7 +63,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link AgregarInforme }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://ws/", name = "agregarInforme")
+    @XmlElementDecl(namespace = "http://webService.monitor.com/", name = "agregarInforme")
     public JAXBElement<AgregarInforme> createAgregarInforme(AgregarInforme value) {
         return new JAXBElement<AgregarInforme>(_AgregarInforme_QNAME, AgregarInforme.class, null, value);
     }
@@ -71,9 +72,18 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link AgregarInformeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://ws/", name = "agregarInformeResponse")
+    @XmlElementDecl(namespace = "http://webService.monitor.com/", name = "agregarInformeResponse")
     public JAXBElement<AgregarInformeResponse> createAgregarInformeResponse(AgregarInformeResponse value) {
         return new JAXBElement<AgregarInformeResponse>(_AgregarInformeResponse_QNAME, AgregarInformeResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LogDTO }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webService.monitor.com/", name = "log")
+    public JAXBElement<LogDTO> createLog(LogDTO value) {
+        return new JAXBElement<LogDTO>(_Log_QNAME, LogDTO.class, null, value);
     }
 
 }

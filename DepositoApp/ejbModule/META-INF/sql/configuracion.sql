@@ -38,7 +38,8 @@ INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipo
 --INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (1,'DES-G01','localhost:8080','jms/queues/LocalServer1Q', NULL,'async','s');
 
 
-INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (888888,'MON-G03','localhost:8080','TestWebMethod/WSInformeAuditoriaBean', NULL,'sync','s');
-
-
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (888888,'MON-G03','172.20.10.5:8080','MonitoreoEJB/WSInformeAuditoriaBean', NULL,'sync','n');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (777777,'DES-G08','172.16.165.28:8080','jms/queue/RecepcionArticulosDeposito', NULL,'async','n');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (666666,'DES-G08','172.16.165.33:8080','jms/queue/RecepcionArticulosDeposito', NULL,'async','n');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (555555,'DES-G08','172.16.165.31:8080','jms/queue/RecepcionArticulosDeposito', NULL,'async','n');
 
