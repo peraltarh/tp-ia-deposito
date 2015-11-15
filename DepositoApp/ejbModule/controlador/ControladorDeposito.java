@@ -72,7 +72,7 @@ public class ControladorDeposito {
 		dep.nuevoArticulo(articulo, stock,idCategoria);
 
 		notificacion.informarArticulo(articulo, "DES");
-		notificacion.informarArticulo(articulo, "DEP");
+		notificacion.informarArticulo(articulo, "POR");
 		notificacion.informarArticuloLM(articulo);
 
 	}
