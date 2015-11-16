@@ -1,5 +1,8 @@
 package controlador;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -8,6 +11,15 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import com.deposito.bean.ArticuloRESTBean;
+import com.deposito.bean.CategoriaRESTBean;
+import com.deposito.bean.ItemPedidoRESTBean;
+import com.deposito.bean.PedidoRESTBean;
+
 import bean.AdminDepositoBean;
 import bean.AdminPedidoBean;
 import dto.ItemSolicitudArticuloDTO;
@@ -237,10 +249,11 @@ public class ControladorDeposito {
 		dep.actualizarFechaRecepcionPedido(pedido.getIdPedido(), new Date());		
 	}
 
+	
+	
 	public int generarPedido(PedidoVO pedidoVO) {
 		Pedido pedido = new Pedido();
 		pedido.setEstado(EnumEstadoPedido.PENDIENTE);
-		// TODO setear una fabrica, preguntar a Rodri o a Franco.
 		pedido.setFabrica(null);
 		pedido.setFechaSolicitud(pedidoVO.getFechaSolicitud());
 		List<ItemPedido> itemsPedidosAFabrica = new ArrayList<ItemPedido>();
@@ -269,8 +282,73 @@ public class ControladorDeposito {
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
 
 		ped.grabarPedido(pedido);
+		
+		
+		
 		return pedido.getIdPedido();
 	}
+
+	//********Enviar Pedido a Fabrica*************//
+	
+	
+	public static String enviarPedidoAFabrica (Pedido pedido){
+		
+		
+		PedidoRESTBean pe = new PedidoRESTBean();
+    	pe.setIdPedido(pedido.getIdPedido());
+    	pe.setFechaRecepcion(null);
+    	pe.setFechaSolicitud(pedido.getFechaSolicitud());
+    	List<ItemPedidoRESTBean> items = new ArrayList<ItemPedidoRESTBean>();
+    	pe.setItemsPedidosAFabrica(items);
+    	for (ItemPedido itemPedido : pedido.getItemsPedidosAFabrica()) {
+			ItemPedidoRESTBean itemRest = new ItemPedidoRESTBean();
+			itemRest.setCantidad(itemPedido.getCantidad());
+			
+			ArticuloRESTBean articuloRest = new ArticuloRESTBean();
+			articuloRest.setDescripcion(itemPedido.getArticulo().getDescripcion());
+			articuloRest.setFechaAlta(itemPedido.getArticulo().getFechaAlta());
+			articuloRest.setFichaTecnica(itemPedido.getArticulo().getFichaTecnica());
+			articuloRest.setIdArticulo(itemPedido.getArticulo().getIdArticulo());
+			articuloRest.setMarca(itemPedido.getArticulo().getMarca());
+			articuloRest.setNombre(itemPedido.getArticulo().getNombre());
+			articuloRest.setOrigen(itemPedido.getArticulo().getOrigen());
+			articuloRest.setPrecio(itemPedido.getArticulo().getPrecio());
+			articuloRest.setUrlFoto(itemPedido.getArticulo().getUrlFoto());
+			CategoriaRESTBean cate = new CategoriaRESTBean();
+			cate.setIdCategoria(itemPedido.getArticulo().getTipo().getIdCategoria());
+			cate.setNombre(itemPedido.getArticulo().getTipo().getNombre());
+			articuloRest.setTipo(cate);
+			
+			itemRest.setArticulo(articuloRest);
+		}
+        
+        
+    	// JSON POST
+        URL url;
+		try {
+			url = new URL("http://localhost:8080/FabricaWeb/rest/service/crearPedido");
+	        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setDoOutput(true);
+			urlConnection.setRequestMethod("POST");
+			urlConnection.setRequestProperty("Content-Type", "application/json");
+			
+			
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.writeValue(urlConnection.getOutputStream(), pe);
+			
+			return IOUtils.toString(urlConnection.getInputStream());
+	
+		} catch (IOException e) {
+			return e.getMessage();
+		}
+
+	}
+
+	
+
+	//********Enviar Pedido a Fabrica*************//
+	
+	
 	public List<SolicitudDePedidoVO> listarPedidosPendientes() {
 		EnumSolicitudDePedido estado =EnumSolicitudDePedido.PENDIENTE;
 		List<SolicitudDePedido> solicitudes = dep.obtenerSolicitudesPedidoEnEstado(estado);

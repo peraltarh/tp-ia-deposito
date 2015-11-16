@@ -3,11 +3,7 @@ package controlador;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Singleton;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
-
 import bean.AdminFabricaBean;
 import modelo.EnumEstadoPedido;
 import modelo.Pedido;
@@ -48,6 +44,7 @@ public class ControladorFabrica {
 				pedidoVO.setEstado(EnumEstadoPedidoVO.PENDIENTE);
 				break;
 			}
+			 pedidosVO.add(pedidoVO);
 		}
 		 return pedidosVO;
 		

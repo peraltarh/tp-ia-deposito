@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import controlador.ControladorFabrica;
 import modelo.Pedido;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -13,7 +11,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -127,7 +124,7 @@ public class ListarPedidos extends JFrame implements ActionListener{
 		//TODO
 		if (e.getSource() == this.btnActualizar){
 			this.listModelPedidos.clear();
-			ControladorFabrica cf = new ControladorFabrica();
+//			ControladorFabrica cf = new ControladorFabrica();
 //			List<Pedido> pedidos = cf.buscarPedidos();
 //			for (Pedido pedido : pedidos) {
 //				this.listModelPedidos.addElement(pedido);

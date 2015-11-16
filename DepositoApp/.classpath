@@ -15,5 +15,14 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="Varios/gson-2.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/FabricaAppClient"/>
+	<classpathentry kind="lib" path="Varios/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="Varios/jackson-annotations-2.5.1.jar"/>
+	<classpathentry kind="lib" path="Varios/jackson-core-2.5.1.jar"/>
+	<classpathentry kind="lib" path="Varios/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="Varios/jackson-databind-2.5.1.jar"/>
+	<classpathentry kind="lib" path="Varios/jackson-jaxrs-1.9.13.jar"/>
+	<classpathentry kind="lib" path="Varios/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="Varios/jackson-xc-1.9.13.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

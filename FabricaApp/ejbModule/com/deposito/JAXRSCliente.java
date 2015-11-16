@@ -1,23 +1,17 @@
 package com.deposito;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import org.apache.commons.io.IOUtils;
 import org.codehaus.jackson.map.ObjectMapper;
-import javax.xml.bind.Marshaller;
 import com.deposito.bean.ArticuloRESTBean;
 import com.deposito.bean.CategoriaRESTBean;
 import com.deposito.bean.ItemPedidoRESTBean;
 import com.deposito.bean.PedidoRESTBean;
-
-import modelo.EnumEstadoPedido;
 import modelo.ItemPedido;
 import modelo.Pedido;
 

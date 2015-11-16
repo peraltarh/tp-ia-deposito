@@ -1,20 +1,12 @@
 package com.deposito;
 
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-
-
 import com.deposito.bean.ItemPedidoRESTBean;
 import com.deposito.bean.PedidoRESTBean;
-
 import controlador.ControladorFabrica;
 import modelo.Articulo;
 import modelo.Categoria;
@@ -22,14 +14,11 @@ import modelo.EnumEstadoPedido;
 import modelo.ItemPedido;
 import modelo.Pedido;
 
-
+@Stateless
 @Path("/service")
-@RequestScoped
-//@Stateless
 public class JAXRSRecepcionPedido{
 	
 	@Inject
-//	@EJB
 	private ControladorFabrica contFabrica;
 
 	
