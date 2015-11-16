@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -23,21 +22,16 @@ import modelo.EnumEstadoPedido;
 import modelo.ItemPedido;
 import modelo.Pedido;
 
-@RequestScoped
-@Path("/service")
-public class JAXRSRecepcionPedido implements Serializable{
-	
 
-	private static final long serialVersionUID = 1L;
-	@Inject
-	private ControladorFabrica contFabrica;
+@Path("/service")
+@RequestScoped
+//@Stateless
+public class JAXRSRecepcionPedido{
 	
-	@GET
-    @Path("/hola")
-	@Produces({ "text/plain" })
-    public String hola() {
-        return "Hola!";
-    }
+	@Inject
+//	@EJB
+	private ControladorFabrica contFabrica;
+
 	
     @POST
     @Path("/crearPedido")

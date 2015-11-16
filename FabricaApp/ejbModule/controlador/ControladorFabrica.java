@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 
 import bean.AdminFabricaBean;
 import modelo.EnumEstadoPedido;
