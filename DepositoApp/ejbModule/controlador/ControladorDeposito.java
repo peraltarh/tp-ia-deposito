@@ -390,8 +390,6 @@ public class ControladorDeposito {
 
 			solPeVO.addItemPedidoVO(itemVO);
 		}
-
-
 		return solPeVO;
 
 	}
@@ -399,6 +397,24 @@ public class ControladorDeposito {
 	public int getStockArticulo(int idArticulo) {
 		Stock stock= dep.buscarStock(idArticulo);
 		return stock.getCantidad();
+	}
+
+	public void confirmarEnvioSolicitudPedido(int idSolPe, List<Integer> cantidades) {
+		SolicitudDePedido solPe=dep.buscarSolPe(idSolPe);
+		int i=0;
+		for(ItemPedido itemPedido : solPe.getItemsPedido())
+		{
+			this.actualizarStock_idArticulo(itemPedido.getArticulo().getIdArticulo(), cantidades.get(i));
+			
+			//TODO GENERAR ENVIO CON LAS CANTIDADES DE CADA ITEM. 
+			//TODO ENVIAR CON METODO DE FRANCO SOLICITUDPEDIDO Y EL ENVIO
+			i++;
+		}
+	}
+
+	private void actualizarStock_idArticulo(int idArticulo, Integer cantidadADescontar) 
+	{
+		
 	}
 
 }

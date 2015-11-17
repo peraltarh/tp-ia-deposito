@@ -12,10 +12,29 @@
 </head>
 <body>
 
+<script>
+	function confirmarEnvioSolicitudPedido(){
+        $.ajax({	               
+        	   data: ({         		
+            	      i : $("#i").val()        
+            	    }),
+        	    url:   'ConfirmarEnvioSolicitudPedido',
+                type:  'get',
+                beforeSend: function () {
+                        $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#resultado").html(response);
+                }
+        });
+}
+	</script>
+
+
   <body>
   <%@page import="java.util.*" %>
   <%@page import="vo.*" %>
-   
+	
   <table class="table table-bordered">
 	  <thead>
 		  <tr>
@@ -23,26 +42,28 @@
 		  	<th>Articulo</th>
 		  	<th>Cantidad Solicitada</th>	
 		  	<th>Cantidad Disponible</th>	  	
+		  	<th>Cantidad Enviar</th>
 		  </tr>
 	  </thead>
 	  	<tbody>  
 		  	<% @SuppressWarnings("unchecked")
 		  	SolicitudDePedidoVO solicitudVO = (SolicitudDePedidoVO) request.getAttribute("solicitudVO");
 		  	ArrayList<Integer> cantidadesStock = (ArrayList<Integer>) request.getAttribute("cantidadesStock");%>
-		  	<% for (ItemPedidoVO itemVO: solicitudVO.getItemsPedido()) {
-		  		int i = 0;
-		  	%>			
+		  	<%int i = 0; %>
+		  	<% for (ItemPedidoVO itemVO: solicitudVO.getItemsPedido()) { 	%>			
 				<tr>		
 					<td> <%=i%> </td>
 					<td> <%=itemVO.getArticulo().getDescripcion()%> </td>
 					<td> <%=itemVO.getCantidad() %> </td>
 					<td> <%=cantidadesStock.get(i) %> </td>
-	
+					<td> <input id="cantidadEnviar<%=i%>" type="text" value="<%=cantidadesStock.get(i)-itemVO.getCantidad()%>"></td>
 				</tr>
 		  	<%
 		  	i++; }%>
 	  	</tbody>
   </table>
+
+<button id="enviarBtn" onclick="confirmarEnvioSolicitudPedido()"></button>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="js/jquery-1.11.0.js"></script> 

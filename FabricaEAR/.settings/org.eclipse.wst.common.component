@@ -8,9 +8,6 @@
         <dependent-module archiveName="FabricaAppClient.jar" deploy-path="/" handle="module:/resource/FabricaAppClient/FabricaAppClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="DepositoAppClient.jar" deploy-path="/lib" handle="module:/resource/DepositoAppClient/DepositoAppClient">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="FabricaWeb.war" deploy-path="/" handle="module:/resource/FabricaWeb/FabricaWeb">
             <dependent-object/>
             <dependency-type>uses</dependency-type>

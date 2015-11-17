@@ -32,7 +32,7 @@
 				<tr>		
 					<td> <%=solicitudVO.getIdSolicitudDePedido()%> </td>
 					<td> <%=solicitudVO.getFecha() %> </td>
-					<td> <a href="EntregarSolicitudPedido.jsp?idSolicitud=<%=solicitudVO.getIdSolicitudDePedido()%>">Entregar Solicitud Pedido</a> </td>									
+					<td> <a href="EntregarSolicitudPedido.jsp?idSolPe=<%=solicitudVO.getIdSolicitudDePedido()%>">Entregar Solicitud Pedido</a> </td>									
 				</tr>
 		  	<%}%>
 	  	</tbody>

@@ -11,20 +11,20 @@
 </head>
 <body>
 	<script>
-function realizaProceso(){
-    $.ajax({	               
-    	   data: ({
-    		   	  filtro : $("#idSolicitud").val()        		   	  
-    	          }),
-    	    url:   'ListarDetalleSolPe',
-            type:  'get',
-            beforeSend: function () {
-                    $("#resultado").html("Procesando, espere por favor...");
-            },
-            success:  function (response) {
-                    $("#resultado").html(response);
-            }
-    });
+	function realizaProceso(){
+        $.ajax({	               
+        	   data: ({ 
+        		   idSolPe2 : $("#idSolPe").val()        		   	  
+        	          }),
+        	    url:   'ListarDetalleSolPe',
+                type:  'get',
+                beforeSend: function () {
+                        $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#resultado").html(response);
+                }
+        });
 }
 	</script>
 
@@ -35,9 +35,9 @@ function realizaProceso(){
 	<br>
 
 	<%
-		session.setAttribute("idSolicitud", request.getParameter("idSolicitud"));
+	session.setAttribute("idSolPe", request.getParameter("idSolPe"));
 	%>
-<br>
+	<br>
 	<table>
 		<tr>
 			<td>
@@ -46,8 +46,8 @@ function realizaProceso(){
 			</td>
 		</tr>
 	</table>
-	<span id="resultado"></span>  	
-			
+	<span id="resultado"></span>
+
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->

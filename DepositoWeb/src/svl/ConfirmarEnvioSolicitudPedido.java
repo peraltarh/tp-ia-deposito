@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,15 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.ControladorDeposito;
-import vo.PedidoVO;
-import vo.SolicitudDePedidoVO;
-import vo.ItemPedidoVO;
 
 /**
- * Servlet implementation class ListarSolicitudesPedidosPendientes
+ * Servlet implementation class ModificarStockSVL
  */
-@WebServlet("/ListarDetalleSolPe")
-public class ListarDetalleSolPe extends HttpServlet {
+@WebServlet("/ConfirmarEnvioSolicitudPedido")
+public class ConfirmarEnvioSolicitudPedido extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -30,7 +26,7 @@ public class ListarDetalleSolPe extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListarDetalleSolPe() {
+	public ConfirmarEnvioSolicitudPedido() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -42,23 +38,15 @@ public class ListarDetalleSolPe extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int idSolPe2= Integer.parseInt((String)request.getSession().getAttribute("idSolPe"));
-
-		SolicitudDePedidoVO solPeVO= controladorDep.buscarSolicitud(idSolPe2);
-		ArrayList<ItemPedidoVO> itemsVO = new ArrayList<ItemPedidoVO>();
-		itemsVO = (ArrayList<ItemPedidoVO>) solPeVO.getItemsPedido();
-		ArrayList<Integer> cantidadesStock = new ArrayList<Integer>();
-		for(ItemPedidoVO itemVO : itemsVO)
-		{
-			int cant = 0;
-			cant=controladorDep.getStockArticulo(itemVO.getArticulo().getIdArticulo());
-			cantidadesStock.add(cant);
+		int i = Integer.parseInt(request.getParameter("i"));
+		List<Integer> cantidades = new ArrayList<>();
+		for (int j = 0; j <= i; j++) {
+			cantidades.add(Integer.parseInt((String)request.getParameter("cantidadEnviar"+i)));
 		}
-		request.setAttribute("solicitudVO", solPeVO);
-		request.setAttribute("cantidadesStock", cantidadesStock);
+		int idSolPe = Integer.parseInt((String) request.getSession().getAttribute("idSolPe"));
+//TODO		ControladorDeposito.this.confirmarEnvioSolicitudPedido(idSolPe, cantidades);
+		response.getWriter().println("Stock modificado con exito");;
 
-		RequestDispatcher rd = request.getRequestDispatcher("listadoDetalleSolPe.jsp");
-		rd.forward(request, response);
 	}
 
 	/**
@@ -67,6 +55,7 @@ public class ListarDetalleSolPe extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

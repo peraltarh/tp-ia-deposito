@@ -3,7 +3,6 @@
 	<name>FabricaEAR</name>
 	<comment></comment>
 	<projects>
-		<project>DepositoAppClient</project>
 		<project>FabricaApp</project>
 		<project>FabricaAppClient</project>
 		<project>FabricaWeb</project>

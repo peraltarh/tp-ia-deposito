@@ -31,7 +31,7 @@ public class AdminSolicitudPedidoBean {
 		return resultado;
 	}
 
-	public SolicitudDePedido buscarSolPe(int idSolPe) {
+	public SolicitudDePedido buscarSolPe(long idSolPe) {
 		return em.find(SolicitudDePedido.class, idSolPe);
 	}
 
