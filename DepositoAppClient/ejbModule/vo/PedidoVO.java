@@ -7,6 +7,7 @@ import java.util.List;
 
 public class PedidoVO {
 
+	private int idPedidoLocal;
 	private int idPedido;
 	private Date fechaSolicitud;
 	List<ItemPedidoVO> itemsPedidosAFabrica;
@@ -17,6 +18,19 @@ public class PedidoVO {
 	public int getIdPedido() {
 		return idPedido;
 	}
+	
+	
+	public int getIdPedidoLocal() {
+		return idPedidoLocal;
+	}
+
+
+
+	public void setIdPedidoLocal(int idPedidoLocal) {
+		this.idPedidoLocal = idPedidoLocal;
+	}
+
+
 
 	public void setIdPedido(int idPedido) {
 		this.idPedido = idPedido;

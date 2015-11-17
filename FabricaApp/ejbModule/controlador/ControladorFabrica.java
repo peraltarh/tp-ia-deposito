@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -32,6 +33,7 @@ public class ControladorFabrica {
 		 List<PedidoVO> pedidosVO = new ArrayList<PedidoVO>();
 		 for (Pedido pedido : pedidos) {
 			 PedidoVO pedidoVO = new PedidoVO();
+			 pedidoVO.setIdPedidoLocal(pedido.getIdPedidoLocal());
 			 pedidoVO.setIdPedido(pedido.getIdPedido());
 			 switch (pedido.getEstado()) {
 			case ENTREGADO:
@@ -47,6 +49,16 @@ public class ControladorFabrica {
 			 pedidosVO.add(pedidoVO);
 		}
 		 return pedidosVO;
+		
+	}
+
+
+	public void cerrarPedido(PedidoVO pedidoVO) {
+		Pedido ped = fab.obtenerPedido(pedidoVO.getIdPedidoLocal());
+		ped.setEstado(EnumEstadoPedido.ENTREGADO);
+		ped.setFechaRecepcion(GregorianCalendar.getInstance().getTime());
+		fab.actualizarPedido(ped);
+		//TODO enviar a deposito
 		
 	}
 

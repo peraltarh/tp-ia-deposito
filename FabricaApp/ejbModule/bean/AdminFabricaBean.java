@@ -30,5 +30,14 @@ public class AdminFabricaBean {
 	public void persistirPedido (Pedido pedido){
 		adminPedido.persistirPedido(pedido);
 	}
+	
+	public void actualizarPedido (Pedido pedido){
+		adminPedido.actualizarPedido(pedido);
+	}
+
+	public Pedido obtenerPedido(int idPedidoLocal) {
+		return adminPedido.obtenerPedido(idPedidoLocal);
+		
+	}
 
 }

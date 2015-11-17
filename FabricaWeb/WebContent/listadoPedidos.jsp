@@ -32,7 +32,7 @@
 				<tr>		
 					<td> <%=unPedido.getIdPedido()%> </td>
 					<td> <%=unPedido.getEstado()%> </td>
-					<td><a>seleccionar</a></td>								
+					<td><a  href="cerrarPedido.jsp?idPedido=<%=unPedido.getIdPedido()%>">Cerrar Pedido</a></td>								
 				</tr>
 		  	<%}%>
 	  	</tbody>

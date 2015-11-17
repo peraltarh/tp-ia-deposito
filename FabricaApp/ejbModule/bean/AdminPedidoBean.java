@@ -35,8 +35,14 @@ public class AdminPedidoBean {
 	
 	public void persistirPedido (Pedido pedido){
 		em.persist(pedido);
-		pedido = em.find(Pedido.class, pedido.getIdPedidoLocal());
-		System.out.println(pedido.getIdPedidoLocal());
+	}
+	public void actualizarPedido (Pedido pedido){
+		em.persist(pedido);
+	}
+
+
+	public Pedido obtenerPedido(int idPedidoLocal) {
+		return em.find(Pedido.class, idPedidoLocal);
 	}
 	
 
