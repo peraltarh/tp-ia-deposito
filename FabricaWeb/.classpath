@@ -17,5 +17,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/FabricaAppClient"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jboss-client.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DepositoAppClient"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

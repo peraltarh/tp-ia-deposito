@@ -24,5 +24,7 @@
 	<classpathentry kind="lib" path="libs/jackson-xc-1.9.13.jar"/>
 	<classpathentry kind="lib" path="libs/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="libs/javax.inject-1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DepositoAppClient"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/FabricaAppClient"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
