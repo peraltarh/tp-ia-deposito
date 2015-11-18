@@ -12,5 +12,8 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="DepositoAppClient.jar" deploy-path="/lib" handle="module:/resource/DepositoAppClient/DepositoAppClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
