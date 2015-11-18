@@ -37,14 +37,17 @@ public class ConfirmarEnvioSolicitudPedido extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 
-		int i = Integer.parseInt(request.getParameter("i"));
+		int i = Integer.parseInt((String)request.getSession().getAttribute("cantI"));
+		String cant1 = (String) request.getSession().getAttribute("cantidadEnviar0");
+		
 		List<Integer> cantidades = new ArrayList<>();
 		for (int j = 0; j <= i; j++) {
 			cantidades.add(Integer.parseInt((String)request.getParameter("cantidadEnviar"+i)));
 		}
 		int idSolPe = Integer.parseInt((String) request.getSession().getAttribute("idSolPe"));
-//TODO		ControladorDeposito.this.confirmarEnvioSolicitudPedido(idSolPe, cantidades);
+		controladorDep.confirmarEnvioSolicitudPedido(idSolPe, cantidades);
 		response.getWriter().println("Stock modificado con exito");;
 
 	}

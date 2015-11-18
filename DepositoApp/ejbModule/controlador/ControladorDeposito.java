@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,9 +30,11 @@ import dto.SolicitudArticuloDTO;
 import modelo.Articulo;
 import modelo.Categoria;
 import modelo.Despacho;
+import modelo.EnumEstadoEnvio;
 import modelo.EnumEstadoItemPedido;
 import modelo.EnumEstadoPedido;
 import modelo.EnumSolicitudDePedido;
+import modelo.Envio;
 import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.Portal;
@@ -249,8 +252,8 @@ public class ControladorDeposito {
 		dep.actualizarFechaRecepcionPedido(pedido.getIdPedido(), new Date());		
 	}
 
-	
-	
+
+
 	public int generarPedido(PedidoVO pedidoVO) {
 		Pedido pedido = new Pedido();
 		pedido.setEstado(EnumEstadoPedido.PENDIENTE);
@@ -282,28 +285,28 @@ public class ControladorDeposito {
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
 
 		ped.grabarPedido(pedido);
-		
-		
-		
+
+
+
 		return pedido.getIdPedido();
 	}
 
 	//********Enviar Pedido a Fabrica*************//
-	
-	
+
+
 	public static String enviarPedidoAFabrica (Pedido pedido){
-		
-		
+
+
 		PedidoRESTBean pe = new PedidoRESTBean();
-    	pe.setIdPedido(pedido.getIdPedido());
-    	pe.setFechaRecepcion(null);
-    	pe.setFechaSolicitud(pedido.getFechaSolicitud());
-    	List<ItemPedidoRESTBean> items = new ArrayList<ItemPedidoRESTBean>();
-    	pe.setItemsPedidosAFabrica(items);
-    	for (ItemPedido itemPedido : pedido.getItemsPedidosAFabrica()) {
+		pe.setIdPedido(pedido.getIdPedido());
+		pe.setFechaRecepcion(null);
+		pe.setFechaSolicitud(pedido.getFechaSolicitud());
+		List<ItemPedidoRESTBean> items = new ArrayList<ItemPedidoRESTBean>();
+		pe.setItemsPedidosAFabrica(items);
+		for (ItemPedido itemPedido : pedido.getItemsPedidosAFabrica()) {
 			ItemPedidoRESTBean itemRest = new ItemPedidoRESTBean();
 			itemRest.setCantidad(itemPedido.getCantidad());
-			
+
 			ArticuloRESTBean articuloRest = new ArticuloRESTBean();
 			articuloRest.setDescripcion(itemPedido.getArticulo().getDescripcion());
 			articuloRest.setFechaAlta(itemPedido.getArticulo().getFechaAlta());
@@ -318,37 +321,37 @@ public class ControladorDeposito {
 			cate.setIdCategoria(itemPedido.getArticulo().getTipo().getIdCategoria());
 			cate.setNombre(itemPedido.getArticulo().getTipo().getNombre());
 			articuloRest.setTipo(cate);
-			
+
 			itemRest.setArticulo(articuloRest);
 		}
-        
-        
-    	// JSON POST
-        URL url;
+
+
+		// JSON POST
+		URL url;
 		try {
 			url = new URL("http://localhost:8080/FabricaWeb/rest/service/crearPedido");
-	        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("POST");
 			urlConnection.setRequestProperty("Content-Type", "application/json");
-			
-			
+
+
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.writeValue(urlConnection.getOutputStream(), pe);
-			
+
 			return IOUtils.toString(urlConnection.getInputStream());
-	
+
 		} catch (IOException e) {
 			return e.getMessage();
 		}
 
 	}
 
-	
+
 
 	//********Enviar Pedido a Fabrica*************//
-	
-	
+
+
 	public List<SolicitudDePedidoVO> listarPedidosPendientes() {
 		EnumSolicitudDePedido estado =EnumSolicitudDePedido.PENDIENTE;
 		List<SolicitudDePedido> solicitudes = dep.obtenerSolicitudesPedidoEnEstado(estado);
@@ -401,20 +404,35 @@ public class ControladorDeposito {
 
 	public void confirmarEnvioSolicitudPedido(int idSolPe, List<Integer> cantidades) {
 		SolicitudDePedido solPe=dep.buscarSolPe(idSolPe);
+		solPe.setEstado(EnumSolicitudDePedido.ENTREGADO);
+
+		Envio envio = new Envio();
+		envio.setFecha(Calendar.getInstance().getTime());
+		envio.setEstado(EnumEstadoEnvio.ENTREGADO);
+		envio.setSolicitudDePedido(solPe);
+
 		int i=0;
+
+		ArrayList <ItemPedido> itemsPedidoEnvio = new ArrayList<ItemPedido>();
 		for(ItemPedido itemPedido : solPe.getItemsPedido())
 		{
+			ItemPedido itemPedidoEnvio = new ItemPedido();
+			itemPedidoEnvio = itemPedido;
+			itemPedidoEnvio.setCantidad(cantidades.get(i));
+			itemsPedidoEnvio.add(itemPedidoEnvio);
+
 			this.actualizarStock_idArticulo(itemPedido.getArticulo().getIdArticulo(), cantidades.get(i));
-			
-			//TODO GENERAR ENVIO CON LAS CANTIDADES DE CADA ITEM. 
-			//TODO ENVIAR CON METODO DE FRANCO SOLICITUDPEDIDO Y EL ENVIO
+
 			i++;
 		}
+
+		envio.setItemsEnviados(itemsPedidoEnvio);
 	}
 
 	private void actualizarStock_idArticulo(int idArticulo, Integer cantidadADescontar) 
 	{
-		
+		Stock s = dep.buscarStock(idArticulo);
+		s.setCantidad(s.getCantidad()-cantidadADescontar);
 	}
 
 }
