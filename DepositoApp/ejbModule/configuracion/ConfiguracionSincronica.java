@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 
 import com.monitor.webservice.LogDTO;
 
+import dto.EnvioDTO;
+import dto.PedidoFabricaDTO;
 import notificacion.NotificacionSincronica;
+import notificacion.NotificacionSincronicaRest;
 
 
 
@@ -28,6 +31,19 @@ public class ConfiguracionSincronica extends Configuracion {
 	public void notificarLog(LogDTO detalle) {
 		NotificacionSincronica notificacion = new NotificacionSincronica(this);
 		notificacion.notificarLog(detalle);
+	}
+
+	@Override
+	public void notificarEntregaArticulosDespacho(EnvioDTO articulos) {
+		NotificacionSincronicaRest notificacion = new NotificacionSincronicaRest(this);
+		notificacion.notificarEntregaArticulosDespacho(articulos);
+		
+	}
+
+	@Override
+	public void notificarPedidoFabrica(PedidoFabricaDTO pedido) {
+		NotificacionSincronicaRest notificacion = new NotificacionSincronicaRest(this);
+		notificacion.notificarPedidoFabrica(pedido);		
 	}
 
 }

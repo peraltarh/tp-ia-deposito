@@ -15,6 +15,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="Varios/gson-2.4.jar"/>
+	<classpathentry kind="lib" path="Varios/httpclient-4.3.jar"/>
+	<classpathentry kind="lib" path="Varios/httpclient-cache-4.3.jar"/>
+	<classpathentry kind="lib" path="Varios/httpcore-4.3.jar"/>
+	<classpathentry kind="lib" path="Varios/httpmime-4.3.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/FabricaAppClient"/>
 	<classpathentry kind="lib" path="Varios/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="Varios/jackson-annotations-2.5.1.jar"/>

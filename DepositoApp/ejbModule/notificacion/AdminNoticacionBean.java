@@ -4,6 +4,7 @@ import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,7 +19,12 @@ import com.monitor.webservice.LogDTO;
 import bean.AdminConfiguracionBean;
 import configuracion.Configuracion;
 import dto.ArticuloDTO;
+import dto.EnvioDTO;
+import dto.ItemSolicitudArticuloDTO;
 import modelo.Articulo;
+import modelo.Envio;
+import modelo.ItemPedido;
+import modelo.SolicitudDePedido;
 
 
 
@@ -116,30 +122,40 @@ public class AdminNoticacionBean {
 			unaConfiguracion.notificarLog(detalle);
 		}
 		
-
 	}
-
-
-	private String obtenerLogXML(Articulo articulo) {
-		LogDTO logLM = new LogDTO();
-		//logLM.setFecha("ej fecha");
-		//logLM.setIdModulo("DEP-G12");
-		//logLM.descripcion("Se creo el articulo: Id " + articulo.getIdArticulo() + "Nombre:" + articulo.getNombre());
-
-		JAXBContext jc;
-		StringWriter writer = new StringWriter();
-		try {
-			jc = JAXBContext.newInstance(LogDTO.class);
-			Marshaller m = jc.createMarshaller();
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-			m.marshal(logLM, writer);
-
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+	public void entregarArticulosDespacho(SolicitudDePedido solPe, Envio envio) {
+		String idDespacho = solPe.getIdDespacho();
+		
+		this.gruposAnotificar = adm.buscarConfiguracionSincronica(idDespacho);
+		
+		EnvioDTO envioDTO = new EnvioDTO();
+		List<ItemSolicitudArticuloDTO> itemsEnvioDTO = new LinkedList<ItemSolicitudArticuloDTO>();
+		
+		List<ItemPedido> itemsEnvio = envio.getItemsEnviados(); 
+		Iterator <ItemPedido> itEnv = itemsEnvio.iterator();
+		
+		logger.info("Entrega Articulos a Despacho");
+		
+		while (itEnv.hasNext()){
+			ItemPedido itemEnvio = itEnv.next();
+			ItemSolicitudArticuloDTO itemDTO = new ItemSolicitudArticuloDTO();
+			itemDTO.setIdArticulo(itemEnvio.getArticulo().getCodArticulo());
+			itemDTO.setCantidad(itemEnvio.getCantidad());
+			itemsEnvioDTO.add(itemDTO);			
 		}
-		return writer.toString();
+		
+		envioDTO.setItems(itemsEnvioDTO);
+		envioDTO.setIdDeposito("DEP-G12");
+		envioDTO.setIdSolicitud(solPe.getIdSolicitudArticulo());
+				
+		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
+		
+		while (itSync.hasNext()) {
+			Configuracion unaConfiguracion = itSync.next();
+			unaConfiguracion.notificarEntregaArticulosDespacho(envioDTO);
+		}
+		
 	}
 
 }

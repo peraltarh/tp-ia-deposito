@@ -14,6 +14,10 @@ import javax.persistence.Table;
 
 import com.monitor.webservice.LogDTO;
 
+import dto.EnvioDTO;
+import dto.PedidoFabricaDTO;
+import modelo.Envio;
+
 
 
 
@@ -81,6 +85,10 @@ public abstract class Configuracion implements Serializable {
 	public abstract void notificar(String notificacion);
 	
 	public abstract void notificarLog(LogDTO detalle);
+	
+	public abstract void notificarEntregaArticulosDespacho(EnvioDTO articulos);
+	
+	public abstract void  notificarPedidoFabrica(PedidoFabricaDTO pedido); 
 
 	public String getActivo() {
 		return activo;

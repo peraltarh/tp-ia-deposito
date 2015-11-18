@@ -30,5 +30,17 @@
         <dependent-module archiveName="jackson-core-2.5.1.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/jackson-core-2.5.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="httpclient-4.3.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/httpclient-4.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="httpclient-cache-4.3.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/httpclient-cache-4.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="httpcore-4.3.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/httpcore-4.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="httpmime-4.3.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/httpmime-4.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
