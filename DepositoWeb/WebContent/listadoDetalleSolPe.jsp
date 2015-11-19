@@ -12,74 +12,59 @@
 </head>
 <body>
 
-	<script>
-		function confirmarEnvioSolicitudPedido() {
-			$.ajax({
-				data : ({
-					"cant" : $("#i").val,
-					"test" : "test"
-				}),
-				url : 'ConfirmarEnvioSolicitudPedido',
-				type : 'get',
-				beforeSend : function() {
-					$("#resultado").html("Procesando, espere por favor...");
-				},
-				success : function(response) {
-					$("#resultado").html(response);
-				}
-			});
-		}
-	</script>
-<body>
 	<%@page import="java.util.*"%>
 	<%@page import="vo.*"%>
 	<%
 		int i = 0;
 	%>
+	
+	<script type="text/javascript">
+	function enviar() {
+		document.getElementById("formulario").submit();
+	}
+	</script>
+	
+	<form name="ConfirmarEnvioSolicitudPedido" action="ConfirmarEnvioSolicitudPedido" id="formulario" method="GET">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Nro Item</th>
+					<th>Articulo</th>
+					<th>Cantidad Solicitada</th>
+					<th>Cantidad Disponible</th>
+					<th>Cantidad Enviar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					SolicitudDePedidoVO solicitudVO = (SolicitudDePedidoVO) request.getAttribute("solicitudVO");
+					ArrayList<Integer> cantidadesStock = (ArrayList<Integer>) request.getAttribute("cantidadesStock");
+				%>
+				<%
+					for (ItemPedidoVO itemVO : solicitudVO.getItemsPedido()) {
+				%>
+				<tr>
+					<td><%=i%></td>
+					<td><%=itemVO.getArticulo().getDescripcion()%></td>
+					<td><%=itemVO.getCantidad()%></td>
+					<td><%=cantidadesStock.get(i)%></td>
+					<td><input id="cantidadEnviar<%=i%>"
+						name="cantidadEnviar<%=i%>" type="text"
+						value="<%=itemVO.getCantidad()%>"></td>
+				</tr>
+				<%
+					i++;
+					}
+					session.setAttribute("cantI", String.valueOf(i));
+					for (int j = i; j > 0; j--) {
+						// 				session.setAttribute("cantidadEnviar"+j, );
+					}
+				%>
 
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>Nro Item</th>
-				<th>Articulo</th>
-				<th>Cantidad Solicitada</th>
-				<th>Cantidad Disponible</th>
-				<th>Cantidad Enviar</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				@SuppressWarnings("unchecked")
-				SolicitudDePedidoVO solicitudVO = (SolicitudDePedidoVO) request.getAttribute("solicitudVO");
-				ArrayList<Integer> cantidadesStock = (ArrayList<Integer>) request.getAttribute("cantidadesStock");
-			%>
-			<%
-				for (ItemPedidoVO itemVO : solicitudVO.getItemsPedido()) {
-			%>
-			<tr>
-				<td><%=i%></td>
-				<td><%=itemVO.getArticulo().getDescripcion()%></td>
-				<td><%=itemVO.getCantidad()%></td>
-				<td><%=cantidadesStock.get(i)%></td>
-				<td><input id="cantidadEnviar<%=i%>" type="text"
-					value="<%=cantidadesStock.get(i) - itemVO.getCantidad()%>"
-					name="cantidadEnviar"></td>
-			</tr>
-			<%
-				i++;
-				}
-			session.setAttribute("cantI", String.valueOf(i));
-			for(int j=i; j>0;j--)
-			{
-// 				session.setAttribute("cantidadEnviar"+j, );
-			}
-			%>
-
-		</tbody>
-	</table>
-
-	<button id="enviarBtn" onclick="confirmarEnvioSolicitudPedido()">Enviar</button>
-
+			</tbody>
+		</table>
+		<input type="button" id="enviarBtn" value="Enviar" onclick="enviar()">
+	</form>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->

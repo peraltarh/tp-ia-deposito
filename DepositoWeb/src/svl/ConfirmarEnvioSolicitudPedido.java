@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.annotation.JsonFormat.Value;
+
 import controlador.ControladorDeposito;
 
 /**
@@ -40,14 +42,15 @@ public class ConfirmarEnvioSolicitudPedido extends HttpServlet {
 		
 
 		int i = Integer.parseInt((String)request.getSession().getAttribute("cantI"));
-		String cant1 = (String) request.getSession().getAttribute("cantidadEnviar0");
-		
-		List<Integer> cantidades = new ArrayList<>();
-		for (int j = 0; j <= i; j++) {
-			cantidades.add(Integer.parseInt((String)request.getParameter("cantidadEnviar"+i)));
+		ArrayList<Integer> cantidadesEnviar = new ArrayList<Integer>();
+		for(int j=0; j<i; j++)
+		{
+			String valor = request.getParameter("cantidadEnviar"+j);
+			System.out.println(valor);
+			cantidadesEnviar.add(Integer.parseInt(valor));
 		}
 		int idSolPe = Integer.parseInt((String) request.getSession().getAttribute("idSolPe"));
-		controladorDep.confirmarEnvioSolicitudPedido(idSolPe, cantidades);
+		controladorDep.confirmarEnvioSolicitudPedido(idSolPe, cantidadesEnviar);
 		response.getWriter().println("Stock modificado con exito");;
 
 	}

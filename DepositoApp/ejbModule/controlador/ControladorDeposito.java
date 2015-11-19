@@ -427,6 +427,7 @@ public class ControladorDeposito {
 		}
 
 		envio.setItemsEnviados(itemsPedidoEnvio);
+		notificacion.entregarArticulosDespacho(solPe, envio);
 	}
 
 	private void actualizarStock_idArticulo(int idArticulo, Integer cantidadADescontar) 
