@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import bean.AdminFabricaBean;
 import modelo.EnumEstadoPedido;
 import modelo.Pedido;
+import notificacion.AdminNoticacionBean;
 import vo.EnumEstadoPedidoVO;
 import vo.PedidoVO;
 
@@ -17,6 +18,9 @@ public class ControladorFabrica {
 
 	@EJB
 	private AdminFabricaBean fab;
+	
+	@EJB
+	private AdminNoticacionBean not;
 	
 	public void agregarPedido (Pedido pedido){
 		if(pedidos == null) pedidos = new ArrayList<Pedido>();
@@ -54,12 +58,14 @@ public class ControladorFabrica {
 
 
 	public void cerrarPedido(PedidoVO pedidoVO) {
+		
 		Pedido ped = fab.obtenerPedido(pedidoVO.getIdPedidoLocal());
 		ped.setEstado(EnumEstadoPedido.ENTREGADO);
 		ped.setFechaRecepcion(GregorianCalendar.getInstance().getTime());
 		fab.actualizarPedido(ped);
-		//TODO enviar a deposito
-		
+
+		not.entregarPedidoDeposito(pedidoVO.getIdPedido());
+				
 	}
 
 }
