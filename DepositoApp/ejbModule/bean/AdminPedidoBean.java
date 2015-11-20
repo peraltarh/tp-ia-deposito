@@ -6,6 +6,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import modelo.Articulo;
 import modelo.EnumSolicitudDePedido;
 import modelo.Pedido;
 import modelo.SolicitudDePedido;
@@ -36,6 +38,11 @@ public class AdminPedidoBean {
 	
 	public void grabarPedido(Pedido pedido){
 		em.persist(pedido);
+	}
+
+	public Pedido buscarPedido(int idPedido) {
+	    Pedido pedido = em.find(Pedido.class, idPedido);
+		return pedido;	
 	}
 	
 }

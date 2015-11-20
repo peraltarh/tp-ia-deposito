@@ -69,4 +69,9 @@ public class AdminDepositoBean {
 
 	}
 
+	public Pedido buscarPedido(int idPedido) {
+		return adminPedido.buscarPedido(idPedido);
+		
+	}
+
 }

@@ -4,5 +4,5 @@ import javax.ejb.Remote;
 
 @Remote
 public interface PedidoFabricaService {
-	public void recibirPedido(String detallePedido);
+	public void recibirPedido(int idPedido);
 }

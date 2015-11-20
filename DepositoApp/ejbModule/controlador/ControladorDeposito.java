@@ -237,19 +237,20 @@ public class ControladorDeposito {
 		return categoriasVO;
 	}
 
-	public void registrarRecepcionArticulosFabrica (PedidoFabricaDTO pedido) {
-		List<ItemsPedidoFabricaDTO> items = pedido.getItems();
-		Iterator<ItemsPedidoFabricaDTO> it = items.iterator();
-
+	public void registrarRecepcionArticulosFabrica (int idPedido) {	
+		Pedido pedido = dep.buscarPedido(idPedido);		
+		List<ItemPedido> itemsPedido = pedido.getItemsPedidosAFabrica();
+		Iterator<ItemPedido> it = itemsPedido.iterator();
+		
 		while (it.hasNext()) {
-			ItemsPedidoFabricaDTO item = it.next();
-			Stock stockArticulo = dep.buscarStock(item.getIdArticulo());
+			ItemPedido item = it.next();
+			Stock stockArticulo = dep.buscarStock(item.getArticulo().getIdArticulo());
 
 			int nuevoStock = stockArticulo.getCantidad() + item.getCantidad();
 			dep.actualizarStockArticulo(stockArticulo.getIdStock(), nuevoStock);
 		}
 
-		dep.actualizarFechaRecepcionPedido(pedido.getIdPedido(), new Date());		
+		dep.actualizarFechaRecepcionPedido(idPedido, new Date());		
 	}
 
 

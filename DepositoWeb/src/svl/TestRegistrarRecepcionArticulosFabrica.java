@@ -65,7 +65,8 @@ public class TestRegistrarRecepcionArticulosFabrica extends HttpServlet {
 		
 		System.out.println(writer.toString()); 
 		*/
-		dep.registrarRecepcionArticulosFabrica(pedido);
+		int idPedido = 99999;
+		dep.registrarRecepcionArticulosFabrica(idPedido);
 	}
 
 	/**
