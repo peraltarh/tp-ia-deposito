@@ -43,10 +43,10 @@ INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipo
 --INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (666666,'DES-G08','172.16.165.33:8080','jms/queue/RecepcionArticulosDeposito', NULL,'async','n');
 --INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (555555,'DES-G08','172.16.165.31:8080','jms/queue/RecepcionArticulosDeposito', NULL,'async','n');
 
-INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (333333,'MON-G08','3454dbaa.ngrok.io','MonitoreoEJB/WSInformeAuditoriaBean', NULL,'sync','s');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (333333,'MON-G08','3454dbaa.ngrok.io','MonitoreoEJB/WSInformeAuditoriaBean', NULL,'sync','n');
 
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (555555,'POR-G02','dcdf676a.ngrok.io','jms/queue/RecepcionArticulosDeposito', NULL,'async','n');
 
-INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (444444,'DES-G08','dd20c08c.ngrok.io','TPO-DespachoG7-WEB/rest/solicitudes/recibirArticulos', NULL,'sync','s');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (444444,'DES-G08','dd20c08c.ngrok.io','TPO-DespachoG7-WEB/rest/solicitudes/recibirArticulos', NULL,'sync','n');
 
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (222222,'DES-G02','74938c8f.ngrok.io','DespachoWeb/rest/solicitudes/recibirArticulos', NULL,'sync','n');
