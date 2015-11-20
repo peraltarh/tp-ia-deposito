@@ -94,11 +94,11 @@
                 </formatter>
             </console-handler>
             <periodic-rotating-file-handler name="depositoLog" autoflush="true">
-			    <formatter>
+                <formatter>
                     <named-formatter name="PATTERN"/>
                 </formatter>
                 <file relative-to="jboss.server.log.dir" path="depositoLog.log"/>
-				<suffix value=".yyyy-MM-dd"/>
+                <suffix value=".yyyy-MM-dd"/>
                 <append value="true"/>
             </periodic-rotating-file-handler>
             <periodic-rotating-file-handler name="FILE" autoflush="true">
@@ -111,16 +111,22 @@
             </periodic-rotating-file-handler>
             <logger category="notificacion">
                 <level name="INFO"/>
-				<handlers>
-					<handler name="depositoLog"/>
-				</handlers>
+                <handlers>
+                    <handler name="depositoLog"/>
+                </handlers>
             </logger>
-			<logger category="mdb">
+            <logger category="mdb">
                 <level name="INFO"/>
-				<handlers>
-					<handler name="depositoLog"/>
-				</handlers>
+                <handlers>
+                    <handler name="depositoLog"/>
+                </handlers>
             </logger>
+            <logger category="ws">
+                <level name="INFO"/>
+                <handlers>
+                    <handler name="depositoLog"/>
+                </handlers>
+            </logger>			
             <logger category="com.arjuna">
                 <level name="WARN"/>
             </logger>
