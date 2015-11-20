@@ -1,14 +1,22 @@
 package notificacion;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Logger;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.ParseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import configuracion.Configuracion;
 import dto.EnvioDTO;
 import dto.PedidoFabricaDTO;
+import dto.RespuestaGenericaDTO;
 
 public class NotificacionSincronicaRest {
 	private String url;
@@ -41,13 +50,12 @@ public class NotificacionSincronicaRest {
 
 	}
 
-	public void notificarEntregaArticulosDespacho(EnvioDTO envio) {
-
+	public RespuestaGenericaDTO notificarEntregaArticulosDespacho(EnvioDTO envio) {
+		String respuestaXML = null;
 		String json = convertirAstring(envio);
-		logger.info("Articulos a Enviar:" + json);
+		logger.info("Articulos a Enviar a Despacho:" + json);
 
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		// HttpPost httpPost = new
 		// HttpPost("http://192.168.43.5:8080/TPO-DespachoG7-WEB/rest/solicitudes/recibirArticulos");
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.addHeader("Content-Type", "application/json");
@@ -66,6 +74,43 @@ public class NotificacionSincronicaRest {
 		}
 		System.out.println(response.getStatusLine());
 
+		HttpEntity entity = response.getEntity();
+		try {
+			respuestaXML = EntityUtils.toString(entity);
+			System.out.println(respuestaXML);
+			EntityUtils.consume(entity);
+		} catch (ParseException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		RespuestaGenericaDTO respuesta = obtenerRespuesta(respuestaXML);
+
+		logger.info("Envío de Articulos finalizado");
+		return respuesta;
+
+	}
+
+	private RespuestaGenericaDTO obtenerRespuesta(String respuestaXML) {
+		Unmarshaller unmarshaller = null;
+		RespuestaGenericaDTO respuesta = null;
+		
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(RespuestaGenericaDTO.class);
+			unmarshaller = jaxbContext.createUnmarshaller();
+		} catch (JAXBException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		StringReader reader;
+		try {
+			reader = new StringReader(respuestaXML);
+			respuesta = (RespuestaGenericaDTO) unmarshaller.unmarshal(reader);
+		} catch (ParseException | JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return respuesta;
 	}
 
 	public void notificarPedidoFabrica(PedidoFabricaDTO pedido) {
