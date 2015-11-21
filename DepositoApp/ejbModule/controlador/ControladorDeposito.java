@@ -287,7 +287,7 @@ public class ControladorDeposito {
 
 		ped.grabarPedido(pedido);
 
-
+		enviarPedidoAFabrica(pedido);
 
 		return pedido.getIdPedido();
 	}
