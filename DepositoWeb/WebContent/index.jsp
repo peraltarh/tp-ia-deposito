@@ -15,7 +15,7 @@
 <br>
 <a href="busquedaArticulos.jsp">Buscar Artículo</a>
 <br>
-<a href="GenerarPedido.jsp" >Generar Pedidos</a>
+<a href="GenerarPedido" >Generar Pedidos</a>
 <br>
 <a href="ListarSolicitudesPedidosPendientes.jsp" >Entregar Pedido Solicitado a Despacho</a>
 <br>

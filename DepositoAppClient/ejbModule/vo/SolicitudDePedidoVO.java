@@ -55,5 +55,14 @@ public class SolicitudDePedidoVO {
 	{
 		this.itemsPedido.add(itemVO);
 	}
+
+	public ItemPedidoVO getItemPedido(int id) {
+		for (ItemPedidoVO itemPedidoVO : itemsPedido) {
+			if(itemPedidoVO.getIdItemPedido() == id){
+				return itemPedidoVO;
+			}
+		}
+		return null;
+	}
 }
 

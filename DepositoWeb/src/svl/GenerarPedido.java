@@ -44,7 +44,7 @@ public class GenerarPedido extends HttpServlet {
 	
 		List<SolicitudDePedidoVO> pedidos = conDep.obtenerSolicitudesDePedidoEnEstado(EnumSolicitudDePedidoVO.PENDIENTE);
 		request.setAttribute("listaSolPes", pedidos);
-		RequestDispatcher rd = request.getRequestDispatcher("listadoSolicitudesPedido.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("GenerarPedido.jsp");
 		rd.forward(request, response);
 
 	}
@@ -62,18 +62,24 @@ public class GenerarPedido extends HttpServlet {
 		pedido.setFechaSolicitud(date);
 		// Genero la lista de items que voy a pedir a Fabrica.
 		List<ItemPedidoVO> itemsPedidosAFabrica = new ArrayList<ItemPedidoVO>();
-		for(int i=0; i < pedido.getItemsPedidosAFabrica().size();i++){
-			ItemPedidoVO item = new ItemPedidoVO();
-			item.setArticulo(pedido.getItemsPedidosAFabrica().get(i).getArticulo());
-			item.setCantidad(pedido.getItemsPedidosAFabrica().get(i).getCantidad());
-			item.setIdItemPedido(pedido.getItemsPedidosAFabrica().get(i).getIdItemPedido());
+		String[] lista = request.getParameterValues("solpesSeleccionadas");
+		for (String string : lista) {
+			int SolpeInicio = 0;
+			int SolpeFin = string.indexOf("-");
+			String solpeString = string.substring(SolpeInicio, SolpeFin);
+			int nroSolpe = Integer.parseInt(solpeString);
+			SolicitudDePedidoVO solpe = conDep.buscarSolicitud(nroSolpe);
+			int itemInicio = string.indexOf("-") + 1;
+			int itemFin = string.length();
+			String itemString = string.substring(itemInicio, itemFin);
+			int nroItem = Integer.parseInt(itemString);
+			ItemPedidoVO item = solpe.getItemPedido(nroItem);
 			itemsPedidosAFabrica.add(item);
-		}	
+		}
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
-		//TODO hay que asignar el IdPedido si resulta exitoso desde controlador.
 		pedido.setIdPedido(conDep.generarPedido(pedido));
 		request.setAttribute("nroPedido", pedido.getIdPedido());
-		RequestDispatcher rd = request.getRequestDispatcher("GenerarPedido.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("pedidoExitoso.jsp");
 		rd.forward(request, response);
 	}
 

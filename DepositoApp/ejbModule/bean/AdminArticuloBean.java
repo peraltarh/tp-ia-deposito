@@ -71,4 +71,9 @@ public class AdminArticuloBean {
 		List<Categoria> result = (List<Categoria>)query.getResultList();
 		return result;
 	}
+
+	public Categoria obtenerCategoria(long l) {
+		Categoria categoria = em.find(Categoria.class, l);
+		return categoria;	
+	}
 }

@@ -74,4 +74,8 @@ public class AdminDepositoBean {
 		
 	}
 
+	public Categoria obtenerCategoria(long l) {
+		return adminArticulo.obtenerCategoria(l);
+	}
+
 }

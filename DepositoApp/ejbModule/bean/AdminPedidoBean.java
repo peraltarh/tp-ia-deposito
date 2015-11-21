@@ -36,8 +36,9 @@ public class AdminPedidoBean {
 			em.merge(pedido);
 	}
 	
-	public void grabarPedido(Pedido pedido){
+	public int grabarPedido(Pedido pedido){
 		em.persist(pedido);
+		return pedido.getIdPedido();
 	}
 
 	public Pedido buscarPedido(int idPedido) {
