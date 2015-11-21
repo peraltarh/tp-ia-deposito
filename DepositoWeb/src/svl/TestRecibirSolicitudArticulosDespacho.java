@@ -90,7 +90,21 @@ public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 		
 		for(int i = 0; i<3; i++){
 			ItemSolicitudArticuloDTO itemSolicitudArticuloJSON = new ItemSolicitudArticuloDTO();
-			itemSolicitudArticuloJSON.setIdArticulo(i + 1);
+			switch (i) {
+			case 0:
+				itemSolicitudArticuloJSON.setIdArticulo(1);
+				break;
+			case 1:
+				itemSolicitudArticuloJSON.setIdArticulo(3);
+				break;
+			case 2:
+				itemSolicitudArticuloJSON.setIdArticulo(5);
+				break;
+
+			default:
+				break;
+			}
+
 			itemSolicitudArticuloJSON.setCantidad((i+1)*i);
 			solicitudArticuloJSON.getItems().add(itemSolicitudArticuloJSON);
 		}
