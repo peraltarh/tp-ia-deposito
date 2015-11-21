@@ -2,7 +2,9 @@ package svl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,17 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import bean.AdminArticuloBean;
+import bean.AdminDepositoBean;
 import dto.ItemSolicitudArticuloDTO;
 import dto.SolicitudArticuloDTO;
 import mdb.Producer;
+import modelo.Articulo;
+import modelo.Stock;
 
 /**
  * Servlet implementation class TestQueue
  */
+
 @WebServlet("/TestRecibirSolicitudArticulosDespacho")
 public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+     
+	@EJB
+	AdminDepositoBean adminDep;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,6 +47,42 @@ public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 		Producer prod = new Producer(null);
 		Gson gson = new Gson();
 
+		Articulo art = new Articulo();
+		art.setIdArticulo(0);
+		art.setNombre("art1");
+		art.setFechaAlta(new Date());
+		art.setCodArticulo(1);
+		art.setPrecio(10);
+		Stock stock = new Stock();
+		stock.setArticulo(art);
+		stock.setCantidad(100);
+		
+		adminDep.nuevoArticulo(art, stock,1);
+		
+		art = new Articulo();
+		art.setIdArticulo(0);
+		art.setNombre("art2");
+		art.setFechaAlta(new Date());
+		art.setCodArticulo(1);
+		art.setPrecio(10);
+		stock = new Stock();
+		stock.setArticulo(art);
+		stock.setCantidad(100);
+		
+		adminDep.nuevoArticulo(art, stock,1);
+		
+		art = new Articulo();
+		art.setIdArticulo(0);
+		art.setNombre("art3");
+		art.setFechaAlta(new Date());
+		art.setCodArticulo(1);
+		art.setPrecio(10);
+		stock = new Stock();
+		stock.setArticulo(art);
+		stock.setCantidad(100);
+		
+		adminDep.nuevoArticulo(art, stock,1);
+		
 		SolicitudArticuloDTO solicitudArticuloJSON = new SolicitudArticuloDTO();
 		solicitudArticuloJSON.setIdSolicitudArticulo(1);
 		solicitudArticuloJSON.setIdDespacho("DES-GXX");
@@ -45,7 +90,7 @@ public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 		
 		for(int i = 0; i<3; i++){
 			ItemSolicitudArticuloDTO itemSolicitudArticuloJSON = new ItemSolicitudArticuloDTO();
-			itemSolicitudArticuloJSON.setIdArticulo(i+1);
+			itemSolicitudArticuloJSON.setIdArticulo(i + 1);
 			itemSolicitudArticuloJSON.setCantidad((i+1)*i);
 			solicitudArticuloJSON.getItems().add(itemSolicitudArticuloJSON);
 		}
