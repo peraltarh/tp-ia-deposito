@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import controlador.ControladorDeposito;
 import dto.SolicitudArticuloDTO;
+import notificacion.AdminNoticacionBean;
 
 /**
  * Message-Driven Bean implementation class for: SolicitudPedidoMDB2
@@ -28,6 +29,8 @@ public class SolicitudPedidoMDB implements MessageListener {
 	@EJB
 	private ControladorDeposito dep;
 	private static Logger logger = Logger.getLogger(SolicitudPedidoMDB.class.getName());
+	@EJB
+	private AdminNoticacionBean not;
 
     /**
      * Default constructor. 
@@ -44,8 +47,10 @@ public class SolicitudPedidoMDB implements MessageListener {
 		try {
 			solicitudArticuloJSON = ((TextMessage)message).getText();
 			logger.info("Recepcion Solicitud Articulos JSON recibido : " + solicitudArticuloJSON);
+			not.informarLogLM("Recepcion Solicitud Articulos JSON recibido : " + solicitudArticuloJSON);
 		} catch (JMSException e) {
 			logger.info("Error al obtener JSON Artículo desde Despacho ");
+			not.informarLogLM("Error al obtener JSON Artículo desde Despacho ");
 			e.printStackTrace();
 		}
     	

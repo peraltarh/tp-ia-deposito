@@ -5,6 +5,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Logger;
 
+import javax.ejb.EJB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -30,6 +31,8 @@ import dto.RespuestaGenericaDTO;
 public class NotificacionSincronicaRest {
 	private String url;
 	private static Logger logger = Logger.getLogger(AdminNoticacionBean.class.getName());
+	@EJB
+	private AdminNoticacionBean not;
 
 	public NotificacionSincronicaRest(Configuracion configuracion) {
 		try {
@@ -45,7 +48,6 @@ public class NotificacionSincronicaRest {
 
 	}
 
-	@SuppressWarnings("unused")
 	public void notificar(String notificacion) {
 
 	}
@@ -54,6 +56,8 @@ public class NotificacionSincronicaRest {
 		String respuestaXML = null;
 		String json = convertirAstring(envio);
 		logger.info("Articulos a Enviar a Despacho:" + json);
+		not.informarLogLM("Articulos a Enviar a Despacho:" + json);
+		
 
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		// HttpPost("http://192.168.43.5:8080/TPO-DespachoG7-WEB/rest/solicitudes/recibirArticulos");
@@ -87,6 +91,7 @@ public class NotificacionSincronicaRest {
 		RespuestaGenericaDTO respuesta = obtenerRespuesta(respuestaXML);
 
 		logger.info("Envío de Articulos finalizado");
+		not.informarLogLM("Envío de Articulos finalizado");
 		return respuesta;
 
 	}

@@ -35,6 +35,7 @@ public class AdminNoticacionBean {
 
 	@EJB
 	private AdminConfiguracionBean adm;
+	
 	private static Logger logger = Logger.getLogger(AdminNoticacionBean.class.getName());
 	
 	public void informarArticulo(Articulo articulo, String tipoModulo) {
@@ -45,6 +46,8 @@ public class AdminNoticacionBean {
 		String notificacion = obtenerArticuloXML(articulo);
 		
 		logger.info("Notificación Asíncrona Portal/Despacho: " + notificacion);
+		informarLogLM("Notificación Asíncrona Portal/Despacho: " + notificacion);
+		
 
 		while (it.hasNext()) {
 			Configuracion unaConfiguracion = it.next();
@@ -97,6 +100,7 @@ public class AdminNoticacionBean {
 		String notificacion = idModulo + "_" + mensaje;
 		
 		logger.info("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
+		informarLogLM("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
 		
 		while (itAsync.hasNext()) {
 			Configuracion unaConfiguracion = itAsync.next();
@@ -116,6 +120,7 @@ public class AdminNoticacionBean {
 		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
 		
 		logger.info("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
+		informarLogLM("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
 		
 		while (itSync.hasNext()) {
 			Configuracion unaConfiguracion = itSync.next();
@@ -136,6 +141,8 @@ public class AdminNoticacionBean {
 		Iterator <ItemPedido> itEnv = itemsEnvio.iterator();
 		
 		logger.info("Entrega Articulos a Despacho");
+		informarLogLM("Entrega Articulos a Despacho");
+		
 		
 		while (itEnv.hasNext()){
 			ItemPedido itemEnvio = itEnv.next();
@@ -157,5 +164,44 @@ public class AdminNoticacionBean {
 		}
 		
 	}
+	
+	public void informarLogLM(String mensajeLog) {
+		this.gruposAnotificar = adm.buscarConfiguracionAsincronica("MON");
+				
+		Iterator<Configuracion> itAsync = gruposAnotificar.iterator();
+		
+		String idModulo = "DEP-G12";
+		String mensaje = mensajeLog;
+		String notificacion = idModulo + "_" + mensaje;
+		
+		logger.info("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
+		informarLogLM("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
+		
+		while (itAsync.hasNext()) {
+			Configuracion unaConfiguracion = itAsync.next();
+			unaConfiguracion.notificar(notificacion);
+		}
+		
+		this.gruposAnotificar = adm.buscarConfiguracionSincronica("MON");
+		
+		LogDTO detalle = new LogDTO();
+		
+		SimpleDateFormat formatFecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+		String fecha = formatFecha.format(new Date());
+		
+		detalle.setFecha(fecha);
+		detalle.setIdModulo(idModulo);
+		detalle.setMensaje(mensaje);
+		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
+		
+		logger.info("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
+		informarLogLM("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
+		
+		while (itSync.hasNext()) {
+			Configuracion unaConfiguracion = itSync.next();
+			unaConfiguracion.notificarLog(detalle);
+		}
+		
+	}	
 
 }
