@@ -345,10 +345,10 @@ public class ControladorDeposito {
 			//Notificar al Log Monitor.
 			
 			if (IOUtils.toString(urlConnection.getInputStream()).equals("200")){
-				//notificacion.informarLogLM("Envío exitoso a fábrica del Pedido: " + pedido.getIdPedido() + ".");
+				notificacion.informarLogLM("Envío exitoso a fábrica del Pedido: " + pedido.getIdPedido() + ".");
 				logger.info("Envío exitoso a fábrica del Pedido: " + pedido.getIdPedido() + ".");
 			}else{
-				//notificacion.informarLogLM("Envío fallido a fábrica del Pedido: " + pedido.getIdPedido() + ".");
+				notificacion.informarLogLM("Envío fallido a fábrica del Pedido: " + pedido.getIdPedido() + ".");
 				logger.info("Envío fallido a fábrica del Pedido: " + pedido.getIdPedido() + ".");
 			}
 			

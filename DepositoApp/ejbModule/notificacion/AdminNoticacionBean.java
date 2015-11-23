@@ -175,7 +175,7 @@ public class AdminNoticacionBean {
 		String notificacion = idModulo + "_" + mensaje;
 		
 		logger.info("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
-		informarLogLM("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
+//		informarLogLM("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
 		
 		while (itAsync.hasNext()) {
 			Configuracion unaConfiguracion = itAsync.next();
