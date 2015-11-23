@@ -40,14 +40,15 @@
 		<% List <ItemPedidoVO> itemsPedido = (List<ItemPedidoVO>) solpes.get(i).getItemsPedido();%>
 			<%for(int j=0; j< itemsPedido.size();j++){%>
 				<tr>
-					<th><%=solpes.get(i).getIdSolicitudDePedido()%></th>
-					<th><%=solpes.get(i).getFecha()%>
-					<th><%=itemsPedido.get(j).getArticulo().getIdArticulo()%>
-					<th><%=itemsPedido.get(j).getArticulo().getDescripcion()%>
-					<th><%=itemsPedido.get(j).getArticulo().getStock()%>
-					<th><%=itemsPedido.get(j).getCantidad()%>
-					<th><input name= "stockSolicitado"></input></th>
-					<th><input type="checkbox" name = "solpesSeleccionadas" value=<%=solpes.get(i).getIdSolicitudDePedido() + "-" + itemsPedido.get(j).getIdItemPedido()%>></input></th>
+					<% String id = solpes.get(i).getIdSolicitudDePedido() + "-" + itemsPedido.get(j).getIdItemPedido();%>
+					<th align="center"><%=solpes.get(i).getIdSolicitudDePedido()%></th>
+					<th align="center"><%=solpes.get(i).getFecha()%>
+					<th align="center"><%=itemsPedido.get(j).getArticulo().getIdArticulo()%>
+					<th align="center"><%=itemsPedido.get(j).getArticulo().getDescripcion()%>
+					<th align="center"><%=itemsPedido.get(j).getArticulo().getStock()%>
+					<th align="center"><%=itemsPedido.get(j).getCantidad()%>
+					<th align="center"><input name=<%="stockSolicitado" + id%>></input></th>
+					<th align="center"><input type="checkbox" name = "solpesSeleccionadas" value=<%=solpes.get(i).getIdSolicitudDePedido() + "-" + itemsPedido.get(j).getIdItemPedido()%>></input></th>
 				</tr>
 			<%}%>
 	<%}%>

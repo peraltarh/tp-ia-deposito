@@ -74,6 +74,8 @@ public class GenerarPedido extends HttpServlet {
 			String itemString = string.substring(itemInicio, itemFin);
 			int nroItem = Integer.parseInt(itemString);
 			ItemPedidoVO item = solpe.getItemPedido(nroItem);
+			int cantidadSolicitada = Integer.parseInt(request.getParameter("stockSolicitado"+string));
+			item.setCantidad(cantidadSolicitada);
 			itemsPedidosAFabrica.add(item);
 		}
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);

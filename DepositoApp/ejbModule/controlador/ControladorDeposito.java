@@ -187,11 +187,9 @@ public class ControladorDeposito {
 				itemPedidoVO.setIdItemPedido(itemPedido.getIdItemPedido());
 				itemsPedidoVO.add(itemPedidoVO);
 			}
-			//TODO FER
 			solpeVO.setItemsPedido(itemsPedidoVO);
 			PedidoVO pedidoVO = new PedidoVO();
 			pedidoVO.setItemsPedidosAFabrica(itemsPedidoVO);
-			//pedidoVO.s
 			solpeVO.setPedido(pedidoVO);
 			miListaVOs.add(solpeVO);
 		}
@@ -264,27 +262,13 @@ public class ControladorDeposito {
 		for(int i = 0; i < pedidoVO.getItemsPedidosAFabrica().size(); i++){
 			ItemPedido item = new ItemPedido();
 			Articulo articulo = dep.obtenerArticulo(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getIdArticulo());
-//			Categoria categoria = dep.obtenerCategoria(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getCategoria().getIdCategoria());
-//			articulo.setDescripcion(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getDescripcion());
-//			articulo.setFechaAlta(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getFechaAlta());
-//			articulo.setFichaTecnica(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getFichaTecnica());
-//			articulo.setIdArticulo(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getIdArticulo());
-//			articulo.setMarca(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getMarca());
-//			articulo.setNombre(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getNombre());
-//			articulo.setOrigen(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getOrigen());
-//			articulo.setPrecio(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getPrecio());
-//			categoria.setIdCategoria(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getCategoria().getIdCategoria());
-//			categoria.setNombre(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getCategoria().getNombre());
-//			articulo.setTipo(categoria);
-//			articulo.setUrlFoto(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getUrlFoto());
 			item.setArticulo(articulo);
 			item.setCantidad(pedidoVO.getItemsPedidosAFabrica().get(i).getCantidad());
-			item.setEstado(EnumEstadoItemPedido.PENDIENTE);
-//			item.setIdItemPedido(pedidoVO.getItemsPedidosAFabrica().get(i).getIdItemPedido());
+			item.setEstado(EnumEstadoItemPedido.SOLICITADO);
 			itemsPedidosAFabrica.add(item);
 		}
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);
-
+		
 		int id = ped.grabarPedido(pedido);
 
 		enviarPedidoAFabrica(pedido);
@@ -325,8 +309,6 @@ public class ControladorDeposito {
 
 			itemRest.setArticulo(articuloRest);
 		}
-
-
 		// JSON POST
 		URL url;
 		try {

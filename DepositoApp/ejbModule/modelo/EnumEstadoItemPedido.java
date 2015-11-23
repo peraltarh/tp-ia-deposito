@@ -1,5 +1,5 @@
 package modelo;
 
 public enum EnumEstadoItemPedido {
-	ENTREGADO, PENDIENTE, FALLIDO
+	ENTREGADO, PENDIENTE, FALLIDO, SOLICITADO
 }
