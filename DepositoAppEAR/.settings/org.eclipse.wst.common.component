@@ -42,5 +42,8 @@
         <dependent-module archiveName="httpmime-4.3.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/httpmime-4.3.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="FabricaAppClient.jar" deploy-path="/" handle="module:/resource/FabricaAppClient/FabricaAppClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
