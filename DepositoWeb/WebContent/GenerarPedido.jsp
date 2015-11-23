@@ -40,7 +40,7 @@
 	<%for(int i=0; i < solpes.size();i++){%>
 		<% List <ItemPedidoVO> itemsPedido = (List<ItemPedidoVO>) solpes.get(i).getItemsPedido();%>
 			<%for(int j=0; j< itemsPedido.size();j++){%>
-				<%if (solpes.get(i).getItemPedido(j).getEstado() == EnumEstadoItemPedidoVO.SOLICITADO){%>
+				<%if (itemsPedido.get(j).getEstado().equals(EnumEstadoItemPedidoVO.PENDIENTE)){%>
 					<tr>
 						<% String id = solpes.get(i).getIdSolicitudDePedido() + "-" + itemsPedido.get(j).getIdItemPedido();%>
 						<th align="center"><%=solpes.get(i).getIdSolicitudDePedido()%></th>
