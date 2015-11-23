@@ -45,6 +45,7 @@ import modelo.Stock;
 import notificacion.AdminNoticacionBean;
 import vo.ArticuloVO;
 import vo.CategoriaVO;
+import vo.EnumEstadoItemPedidoVO;
 import vo.EnumSolicitudDePedidoVO;
 import vo.ItemPedidoVO;
 import vo.PedidoVO;
@@ -190,6 +191,20 @@ public class ControladorDeposito {
 				itemPedidoVO.setArticulo(articuloVO);
 				itemPedidoVO.setCantidad(itemPedido.getCantidad());
 				itemPedidoVO.setIdItemPedido(itemPedido.getIdItemPedido());
+				switch (itemPedido.getEstado()) {
+				case ENTREGADO:
+					itemPedidoVO.setEstado(EnumEstadoItemPedidoVO.ENTREGADO);
+					break;
+				case FALLIDO:
+					itemPedidoVO.setEstado(EnumEstadoItemPedidoVO.FALLIDO);
+					break;
+				case PENDIENTE:
+					itemPedidoVO.setEstado(EnumEstadoItemPedidoVO.PENDIENTE);
+					break;
+				case SOLICITADO:
+					itemPedidoVO.setEstado(EnumEstadoItemPedidoVO.SOLICITADO);
+					break;
+				}
 				itemsPedidoVO.add(itemPedidoVO);
 			}
 			solpeVO.setItemsPedido(itemsPedidoVO);
@@ -330,10 +345,10 @@ public class ControladorDeposito {
 			//Notificar al Log Monitor.
 			
 			if (IOUtils.toString(urlConnection.getInputStream()).equals("200")){
-				notificacion.informarLogLM("Envío exitoso a fábrica del Pedido: " + pedido.getIdPedido() + ".");
+				//notificacion.informarLogLM("Envío exitoso a fábrica del Pedido: " + pedido.getIdPedido() + ".");
 				logger.info("Envío exitoso a fábrica del Pedido: " + pedido.getIdPedido() + ".");
 			}else{
-				notificacion.informarLogLM("Envío fallido a fábrica del Pedido: " + pedido.getIdPedido() + ".");
+				//notificacion.informarLogLM("Envío fallido a fábrica del Pedido: " + pedido.getIdPedido() + ".");
 				logger.info("Envío fallido a fábrica del Pedido: " + pedido.getIdPedido() + ".");
 			}
 			

@@ -1,3 +1,4 @@
+<%@page import="modelo.EnumEstadoItemPedido"%>
 <%@page import="modelo.EnumSolicitudDePedido"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
   <%@page import="java.util.*" %>
@@ -39,17 +40,19 @@
 	<%for(int i=0; i < solpes.size();i++){%>
 		<% List <ItemPedidoVO> itemsPedido = (List<ItemPedidoVO>) solpes.get(i).getItemsPedido();%>
 			<%for(int j=0; j< itemsPedido.size();j++){%>
-				<tr>
-					<% String id = solpes.get(i).getIdSolicitudDePedido() + "-" + itemsPedido.get(j).getIdItemPedido();%>
-					<th align="center"><%=solpes.get(i).getIdSolicitudDePedido()%></th>
-					<th align="center"><%=solpes.get(i).getFecha()%>
-					<th align="center"><%=itemsPedido.get(j).getArticulo().getIdArticulo()%>
-					<th align="center"><%=itemsPedido.get(j).getArticulo().getDescripcion()%>
-					<th align="center"><%=itemsPedido.get(j).getArticulo().getStock()%>
-					<th align="center"><%=itemsPedido.get(j).getCantidad()%>
-					<th align="center"><input name=<%="stockSolicitado" + id%>></input></th>
-					<th align="center"><input type="checkbox" name = "solpesSeleccionadas" value=<%=solpes.get(i).getIdSolicitudDePedido() + "-" + itemsPedido.get(j).getIdItemPedido()%>></input></th>
-				</tr>
+				<%if (solpes.get(i).getItemPedido(j).getEstado() == EnumEstadoItemPedidoVO.SOLICITADO){%>
+					<tr>
+						<% String id = solpes.get(i).getIdSolicitudDePedido() + "-" + itemsPedido.get(j).getIdItemPedido();%>
+						<th align="center"><%=solpes.get(i).getIdSolicitudDePedido()%></th>
+						<th align="center"><%=solpes.get(i).getFecha()%>
+						<th align="center"><%=itemsPedido.get(j).getArticulo().getIdArticulo()%>
+						<th align="center"><%=itemsPedido.get(j).getArticulo().getDescripcion()%>
+						<th align="center"><%=itemsPedido.get(j).getArticulo().getStock()%>
+						<th align="center"><%=itemsPedido.get(j).getCantidad()%>
+						<th align="center"><input name=<%="stockSolicitado" + id%>></input></th>
+						<th align="center"><input type="checkbox" name = "solpesSeleccionadas" value=<%=solpes.get(i).getIdSolicitudDePedido() + "-" + itemsPedido.get(j).getIdItemPedido()%>></input></th>
+					</tr>
+				<%}%>
 			<%}%>
 	<%}%>
 	</tbody>

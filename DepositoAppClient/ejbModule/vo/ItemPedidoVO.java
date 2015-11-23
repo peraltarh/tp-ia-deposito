@@ -7,6 +7,15 @@ public class ItemPedidoVO {
 	private int idItemPedido;
 	private ArticuloVO articulo;
 	private int cantidad;
+	private EnumEstadoItemPedidoVO estado;
+
+	public EnumEstadoItemPedidoVO getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EnumEstadoItemPedidoVO estado) {
+		this.estado = estado;
+	}
 
 	public int getIdItemPedido() {
 		return idItemPedido;
