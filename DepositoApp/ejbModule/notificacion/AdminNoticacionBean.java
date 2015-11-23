@@ -195,7 +195,7 @@ public class AdminNoticacionBean {
 		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
 		
 		logger.info("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
-		informarLogLM("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
+//		informarLogLM("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
 		
 		while (itSync.hasNext()) {
 			Configuracion unaConfiguracion = itSync.next();
