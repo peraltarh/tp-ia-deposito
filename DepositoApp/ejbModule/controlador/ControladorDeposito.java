@@ -14,12 +14,14 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.ThresholdingOutputStream;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.deposito.bean.ArticuloRESTBean;
 import com.deposito.bean.CategoriaRESTBean;
 import com.deposito.bean.ItemPedidoRESTBean;
 import com.deposito.bean.PedidoRESTBean;
+import java.util.logging.Logger;
 
 import bean.AdminDepositoBean;
 import bean.AdminPedidoBean;
@@ -63,7 +65,10 @@ public class ControladorDeposito {
 	private AdminPedidoBean ped;
 
 	@EJB
-	AdminNoticacionBean notificacion;
+	private AdminNoticacionBean notificacion;
+	
+	// Variable para notificar al log del Wilfly.
+	private static Logger logger = Logger.getLogger(ControladorDeposito.class.getName());
 
 	public void nuevoArticulo(String nombre, int codigo, String descripcion, String marca, int precio, String url, String origen,
 			String ficha, long idCategoria, int cantidad) {
@@ -279,7 +284,7 @@ public class ControladorDeposito {
 	//********Enviar Pedido a Fabrica*************//
 
 
-	public static String enviarPedidoAFabrica (Pedido pedido){
+	public String enviarPedidoAFabrica (Pedido pedido){
 
 
 		PedidoRESTBean pe = new PedidoRESTBean();
@@ -321,7 +326,17 @@ public class ControladorDeposito {
 
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.writeValue(urlConnection.getOutputStream(), pe);
-
+			
+			//Notificar al Log Monitor.
+			
+			if (IOUtils.toString(urlConnection.getInputStream()).equals("200")){
+				notificacion.informarLogLM("Envío exitoso a fábrica del Pedido: " + pedido.getIdPedido() + ".");
+				logger.info("Envío exitoso a fábrica del Pedido: " + pedido.getIdPedido() + ".");
+			}else{
+				notificacion.informarLogLM("Envío fallido a fábrica del Pedido: " + pedido.getIdPedido() + ".");
+				logger.info("Envío fallido a fábrica del Pedido: " + pedido.getIdPedido() + ".");
+			}
+			
 			return IOUtils.toString(urlConnection.getInputStream());
 
 		} catch (IOException e) {
