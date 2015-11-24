@@ -141,7 +141,7 @@ public class AdminNoticacionBean {
 		Iterator <ItemPedido> itEnv = itemsEnvio.iterator();
 		
 		logger.info("Entrega Articulos a Despacho");
-		informarLogLM("Entrega Articulos a Despacho");
+		//informarLogLM("Entrega Articulos a Despacho");
 		
 		
 		while (itEnv.hasNext()){
@@ -157,8 +157,8 @@ public class AdminNoticacionBean {
 		envioDTO.setIdSolicitud(solPe.getIdSolicitudArticulo());
 				
 		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
-		
-		while (itSync.hasNext()) {
+	
+		while (itSync.hasNext()) {		
 			Configuracion unaConfiguracion = itSync.next();
 			unaConfiguracion.notificarEntregaArticulosDespacho(envioDTO);
 		}
@@ -175,7 +175,8 @@ public class AdminNoticacionBean {
 		String notificacion = idModulo + "_" + mensaje;
 		
 		logger.info("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
-//		informarLogLM("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
+
+		//informarLogLM("Notificación Asíncrona LM: " + "Mensaje " + notificacion);
 		
 		while (itAsync.hasNext()) {
 			Configuracion unaConfiguracion = itAsync.next();
@@ -195,7 +196,8 @@ public class AdminNoticacionBean {
 		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
 		
 		logger.info("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
-//		informarLogLM("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
+		//informarLogLM("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
+
 		
 		while (itSync.hasNext()) {
 			Configuracion unaConfiguracion = itSync.next();
