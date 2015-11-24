@@ -12,22 +12,10 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jboss-client.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/jboss-client.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="gson-2.4.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/gson-2.4.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jackson-databind-2.5.1.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/jackson-databind-2.5.1.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="commons-io-2.4.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/commons-io-2.4.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="jackson-annotations-2.5.1.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/jackson-annotations-2.5.1.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="jackson-core-2.5.1.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/jackson-core-2.5.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="httpclient-4.3.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/httpclient-4.3.jar">
@@ -42,7 +30,25 @@
         <dependent-module archiveName="httpmime-4.3.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoWeb/WebContent/WEB-INF/lib/httpmime-4.3.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="FabricaAppClient.jar" deploy-path="/" handle="module:/resource/FabricaAppClient/FabricaAppClient">
+        <dependent-module archiveName="jackson-databind-2.5.1.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoApp/Varios/jackson-databind-2.5.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-core-2.5.1.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoApp/Varios/jackson-core-2.5.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-annotations-2.5.1.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoApp/Varios/jackson-annotations-2.5.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-xc-1.9.13.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoApp/Varios/jackson-xc-1.9.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-jaxrs-1.9.13.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoApp/Varios/jackson-jaxrs-1.9.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-mapper-asl-1.9.13.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoApp/Varios/jackson-mapper-asl-1.9.13.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-core-asl-1.9.13.jar" deploy-path="/lib" handle="module:/classpath/lib/DepositoApp/Varios/jackson-core-asl-1.9.13.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

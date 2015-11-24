@@ -5,8 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import com.deposito.bean.ItemPedidoRESTBean;
-import com.deposito.bean.PedidoRESTBean;
+
+import com.deposito.bean.*;
 import controlador.ControladorFabrica;
 import modelo.Articulo;
 import modelo.Categoria;

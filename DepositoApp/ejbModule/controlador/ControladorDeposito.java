@@ -17,14 +17,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.ThresholdingOutputStream;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.deposito.bean.ArticuloRESTBean;
-import com.deposito.bean.CategoriaRESTBean;
-import com.deposito.bean.ItemPedidoRESTBean;
-import com.deposito.bean.PedidoRESTBean;
 import java.util.logging.Logger;
 
 import bean.AdminDepositoBean;
 import bean.AdminPedidoBean;
+import com.deposito.bean.*;
 import dto.ItemSolicitudArticuloDTO;
 import dto.ItemsPedidoFabricaDTO;
 import dto.PedidoFabricaDTO;

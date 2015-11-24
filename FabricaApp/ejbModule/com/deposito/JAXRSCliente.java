@@ -8,10 +8,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.codehaus.jackson.map.ObjectMapper;
-import com.deposito.bean.ArticuloRESTBean;
-import com.deposito.bean.CategoriaRESTBean;
-import com.deposito.bean.ItemPedidoRESTBean;
-import com.deposito.bean.PedidoRESTBean;
+
+import com.deposito.bean.*;
 import modelo.ItemPedido;
 import modelo.Pedido;
 

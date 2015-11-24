@@ -6,7 +6,6 @@
 		<project>DepositoApp</project>
 		<project>DepositoAppClient</project>
 		<project>DepositoWeb</project>
-		<project>FabricaAppClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
