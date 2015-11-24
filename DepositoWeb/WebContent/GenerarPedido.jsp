@@ -13,7 +13,8 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<a href="index.jsp">Volver al Índice</a>
+<br>
 <h1><b>Generar Pedido</b></h1>
 <br>
 <form method="post">
