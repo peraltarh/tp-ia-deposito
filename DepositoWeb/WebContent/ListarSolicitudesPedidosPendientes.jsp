@@ -12,11 +12,9 @@
 <body>
 <script>
 function realizaProceso(){
-    $.ajax({	               
-    	   data: ({
-    		   	  filtro : $("#filtro").val()        		   	  
-    	          }),
-    	    url:   'ListarSolicitudesPedidosPendientes',
+    $.ajax({	   
+
+     	    url:   'ListarSolicitudesPedidosPendientes',
             type:  'get',
             beforeSend: function () {
                     $("#resultado").html("Procesando, espere por favor...");
