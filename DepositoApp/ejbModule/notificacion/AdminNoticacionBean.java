@@ -166,6 +166,7 @@ public class AdminNoticacionBean {
 	}
 	
 	public void informarLogLM(String mensajeLog) {
+		logger.info("-- Inicio informarLogLM -- ");
 		this.gruposAnotificar = adm.buscarConfiguracionAsincronica("MON");
 				
 		Iterator<Configuracion> itAsync = gruposAnotificar.iterator();
@@ -195,7 +196,7 @@ public class AdminNoticacionBean {
 		detalle.setMensaje(mensaje);
 		Iterator<Configuracion> itSync = gruposAnotificar.iterator();
 		
-		logger.info("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
+		//logger.info("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
 		//informarLogLM("Notificación Síncrona LM: " + "Fecha/Modulo/Mensaje " + detalle.getFecha() + "/"+ detalle.getIdModulo() + "/" + detalle.getMensaje());
 
 		
@@ -203,7 +204,7 @@ public class AdminNoticacionBean {
 			Configuracion unaConfiguracion = itSync.next();
 			unaConfiguracion.notificarLog(detalle);
 		}
-		
+		logger.info("-- Fin informarLogLM -- ");
 	}	
 
 }
