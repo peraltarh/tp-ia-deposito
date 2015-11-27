@@ -1,7 +1,6 @@
 package svl;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.ControladorDeposito;
-import modelo.ItemPedido;
 import vo.EnumEstadoPedidoVO;
 import vo.EnumSolicitudDePedidoVO;
 import vo.FabricaVO;
@@ -76,6 +74,7 @@ public class GenerarPedido extends HttpServlet {
 			ItemPedidoVO item = solpe.getItemPedido(nroItem);
 			int cantidadSolicitada = Integer.parseInt(request.getParameter("stockSolicitado"+string));
 			item.setCantidad(cantidadSolicitada);
+			item.setSolpe(solpe);
 			itemsPedidosAFabrica.add(item);
 		}
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);

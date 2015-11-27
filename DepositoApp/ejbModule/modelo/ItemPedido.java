@@ -25,6 +25,17 @@ public class ItemPedido implements Serializable {
 	private Articulo articulo;
 	private int cantidad;
 	private EnumEstadoItemPedido estado;
+	@OneToOne
+	@JoinColumn(name = "idSolicitudDePedido")
+	private SolicitudDePedido solpe;
+
+	public SolicitudDePedido getSolicitudDePedido() {
+		return solpe;
+	}
+
+	public void setSolicitudDePedido(SolicitudDePedido solpe) {
+		this.solpe = solpe;
+	}
 
 	public int getIdItemPedido() {
 		return idItemPedido;

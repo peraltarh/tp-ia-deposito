@@ -281,7 +281,11 @@ public class ControladorDeposito {
 			Articulo articulo = dep.obtenerArticulo(pedidoVO.getItemsPedidosAFabrica().get(i).getArticulo().getIdArticulo());
 			item.setArticulo(articulo);
 			item.setCantidad(pedidoVO.getItemsPedidosAFabrica().get(i).getCantidad());
+			SolicitudDePedido solpe = dep.buscarSolPe(pedidoVO.getItemsPedidosAFabrica().get(i).getSolpe().getIdSolicitudDePedido());
 			item.setEstado(EnumEstadoItemPedido.SOLICITADO);
+			int idArticulo = articulo.getIdArticulo();
+			solpe.getItemPedidoDeArticulo(idArticulo).setEstado(EnumEstadoItemPedido.SOLICITADO);
+			item.setSolicitudDePedido(solpe);
 			itemsPedidosAFabrica.add(item);
 		}
 		pedido.setItemsPedidosAFabrica(itemsPedidosAFabrica);

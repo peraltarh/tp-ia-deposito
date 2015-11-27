@@ -92,5 +92,14 @@ public class SolicitudDePedido implements Serializable {
 	public void setIdSolicitudArticulo(int idSolicitudArticulo) {
 		this.idSolicitudArticuloDespacho = idSolicitudArticulo;
 	}
+	
+	public ItemPedido getItemPedidoDeArticulo(int idArticulo){
+		for (ItemPedido itemPedido : itemsPedido) {
+			if (itemPedido.getArticulo().getIdArticulo() == idArticulo){
+				return itemPedido;
+			}
+		}
+		return null;
+	}
 
 }

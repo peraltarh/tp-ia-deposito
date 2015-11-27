@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Pedido Exitoso</title>
 </head>
 <body>
-
+<% int nroPedido = (int) request.getAttribute("nroPedido"); %>
+<h1>Pedido Generado Exitosamente</h1>
+<br>
+<a>Se ha generado exitosamente el Pedido a Fábrica bajo el número: <%=nroPedido%>.</a>
+<br>
+<br>
+<a href="index.jsp">Regresar al Indice.</a>
 </body>
 </html>

@@ -8,6 +8,7 @@ public class ItemPedidoVO {
 	private ArticuloVO articulo;
 	private int cantidad;
 	private EnumEstadoItemPedidoVO estado;
+	private SolicitudDePedidoVO solpe;
 
 	public EnumEstadoItemPedidoVO getEstado() {
 		return estado;
@@ -41,4 +42,11 @@ public class ItemPedidoVO {
 		this.cantidad = cantidad;
 	}
 
+	public void setSolpe(SolicitudDePedidoVO solpe) {
+		this.solpe = solpe;		
+	}
+
+	public SolicitudDePedidoVO getSolpe() {
+		return solpe;		
+	}
 }
