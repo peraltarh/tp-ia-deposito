@@ -26,17 +26,19 @@ function realizaProceso(){
 }
 	</script>
 <h1>DEPOSITO</h1>
-
-<a href="index.jsp">Indice</a>
+<br>
+<a href="IngresoCrearArticuloSVL">Crear nuevo Artículo</a>
+<br>
+<a href="busquedaArticulos.jsp">Buscar Artículo</a>
+<br>
+<a href="GenerarPedido" >Generar Pedido a Fábrica</a>
+<br>
+<a href="ListarSolicitudesPedidosPendientes.jsp" >Entregar Pedido Solicitado a Despacho</a>
+<br>
 
 <h1>Seleccionar Solicitud Pedido</h1>
 <br>
 	<table>
-		<tr>
-			<td><label for="idPedido">idPedido:</label></td>
-			<td><input type="text" class="form-control" id="filtro">
-			</td>
-		</tr>
 		<tr>
 			<td>
 				<button type="submit" class="btn btn-default"

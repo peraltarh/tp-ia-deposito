@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Enviar SOLPE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,9 +19,9 @@
   <table class="table table-bordered">
 	  <thead>
 		  <tr>
-		  	<th>ID PEDIDO</th>
+		  	<th>ID SOLPE</th>
 		  	<th>FECHA</th>
-		  	<th>ENTREGAR PEDIDO</th>	  	
+		  	<th>ENTREGAR SOLPE</th>	  	
 		  </tr>
 	  </thead>
 	  	<tbody>  
