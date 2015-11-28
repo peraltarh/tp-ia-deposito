@@ -444,6 +444,8 @@ public class ControladorDeposito {
 		}
 
 		envio.setItemsEnviados(itemsPedidoEnvio);
+		
+		dep.guardarEnvio(envio);
 		notificacion.entregarArticulosDespacho(solPe, envio);
 	}
 

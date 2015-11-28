@@ -8,8 +8,8 @@ import javax.ejb.Stateless;
 
 import modelo.Articulo;
 import modelo.Categoria;
-import modelo.EnumEstadoPedido;
 import modelo.EnumSolicitudDePedido;
+import modelo.Envio;
 import modelo.Pedido;
 import modelo.SolicitudDePedido;
 import modelo.Stock;
@@ -22,6 +22,8 @@ public class AdminDepositoBean {
 	private AdminPedidoBean adminPedido;
 	@EJB
 	private AdminSolicitudPedidoBean adminSolPe;
+	@EJB
+	private AdminEnvio adminEnv;
 
 	public void nuevoArticulo(Articulo articulo, Stock stock, long idCategoria) {
 		adminArticulo.nuevoArticulo(articulo,idCategoria);
@@ -76,6 +78,11 @@ public class AdminDepositoBean {
 
 	public Categoria obtenerCategoria(long l) {
 		return adminArticulo.obtenerCategoria(l);
+	}
+
+	public Envio guardarEnvio(Envio envio) {
+		return adminEnv.grabarEnvio(envio);
+		
 	}
 
 }

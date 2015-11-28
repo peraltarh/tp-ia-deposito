@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import modelo.Articulo;
+import modelo.EnumEstadoPedido;
 import modelo.EnumSolicitudDePedido;
 import modelo.Pedido;
 import modelo.SolicitudDePedido;
@@ -32,6 +33,7 @@ public class AdminPedidoBean {
 	public void actualizarFechaRecepcionPedido(int idSolicitudCompra, Date fechaRecepcion) {
 		Pedido pedido = em.find(Pedido.class, idSolicitudCompra);
 		if (pedido != null)
+			pedido.setEstado(EnumEstadoPedido.ENTREGADO);
 			pedido.setFechaRecepcion(fechaRecepcion);
 			em.merge(pedido);
 	}
