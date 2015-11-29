@@ -51,7 +51,7 @@ public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 		art.setIdArticulo(0);
 		art.setNombre("art1");
 		art.setFechaAlta(new Date());
-		art.setCodArticulo(1);
+		art.setCodArticulo(100);
 		art.setPrecio(10);
 		Stock stock = new Stock();
 		stock.setArticulo(art);
@@ -63,7 +63,7 @@ public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 		art.setIdArticulo(0);
 		art.setNombre("art2");
 		art.setFechaAlta(new Date());
-		art.setCodArticulo(1);
+		art.setCodArticulo(200);
 		art.setPrecio(10);
 		stock = new Stock();
 		stock.setArticulo(art);
@@ -75,7 +75,7 @@ public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 		art.setIdArticulo(0);
 		art.setNombre("art3");
 		art.setFechaAlta(new Date());
-		art.setCodArticulo(1);
+		art.setCodArticulo(300);
 		art.setPrecio(10);
 		stock = new Stock();
 		stock.setArticulo(art);
@@ -92,13 +92,13 @@ public class TestRecibirSolicitudArticulosDespacho extends HttpServlet {
 			ItemSolicitudArticuloDTO itemSolicitudArticuloJSON = new ItemSolicitudArticuloDTO();
 			switch (i) {
 			case 0:
-				itemSolicitudArticuloJSON.setIdArticulo(1);
+				itemSolicitudArticuloJSON.setIdArticulo(100);
 				break;
 			case 1:
-				itemSolicitudArticuloJSON.setIdArticulo(3);
+				itemSolicitudArticuloJSON.setIdArticulo(200);
 				break;
 			case 2:
-				itemSolicitudArticuloJSON.setIdArticulo(5);
+				itemSolicitudArticuloJSON.setIdArticulo(300);
 				break;
 
 			default:

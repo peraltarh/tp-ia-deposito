@@ -228,7 +228,8 @@ public class ControladorDeposito {
 		while (it.hasNext()){
 			ItemSolicitudArticuloDTO unItemDTO = it.next();
 			ItemPedido unItem = new ItemPedido();
-			unItem.setArticulo(dep.obtenerArticulo(unItemDTO.getIdArticulo()));
+// Franco modificacion			
+			unItem.setArticulo(dep.obtenerArticuloPorCodigo(unItemDTO.getIdArticulo()));
 			unItem.setCantidad(unItemDTO.getCantidad());
 			unItem.setEstado(EnumEstadoItemPedido.PENDIENTE);
 			itemsSolicitud.add(unItem);

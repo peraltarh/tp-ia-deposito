@@ -80,6 +80,10 @@ public class AdminDepositoBean {
 		return adminArticulo.obtenerCategoria(l);
 	}
 
+	public Articulo obtenerArticuloPorCodigo(int codigoArticulo) {
+		return adminArticulo.obtenerArticuloPorCodigo(codigoArticulo);
+	}
+
 	public Envio guardarEnvio(Envio envio) {
 		return adminEnv.grabarEnvio(envio);
 		

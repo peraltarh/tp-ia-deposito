@@ -49,4 +49,6 @@ INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipo
 
 INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (444444,'DES-G08','dd20c08c.ngrok.io','TPO-DespachoG7-WEB/rest/solicitudes/recibirArticulos', NULL,'sync','n');
 
-INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (222222,'DES-G02','74938c8f.ngrok.io','DespachoWeb/rest/solicitudes/recibirArticulos', NULL,'sync','n');
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (222222,'DES-G08','192.168.43.203:8080','DespachoWeb/rest/solicitudes/recibirArticulos', NULL,'sync','n');
+
+INSERT INTO configuracion (IdConfiguracion,IdGrupo,url,recurso ,descripcion,tipoRecurso,activo) VALUES (111111,'DES-G08','localhost:8080','ServerJSON_Test/rest/jsonServices/sendDTO', NULL,'sync','n');

@@ -76,4 +76,14 @@ public class AdminArticuloBean {
 		Categoria categoria = em.find(Categoria.class, l);
 		return categoria;	
 	}
+
+	public Articulo obtenerArticuloPorCodigo(int codigoArticulo) {
+		Query query = em.createQuery("SELECT a "
+				+ "FROM Articulo a "
+				+ "WHERE a.codArticulo = :cod");
+		
+		query.setParameter("cod",codigoArticulo);
+		
+		return (Articulo) query.getSingleResult();	
+	}
 }
