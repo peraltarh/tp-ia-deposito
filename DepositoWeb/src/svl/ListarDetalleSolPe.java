@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.ControladorDeposito;
+import modelo.ItemPedido;
 import vo.PedidoVO;
 import vo.SolicitudDePedidoVO;
 import vo.ItemPedidoVO;
@@ -45,10 +46,12 @@ public class ListarDetalleSolPe extends HttpServlet {
 		int idSolPe2= Integer.parseInt((String)request.getSession().getAttribute("idSolPe"));
 
 		SolicitudDePedidoVO solPeVO= controladorDep.buscarSolicitud(idSolPe2);
-		ArrayList<ItemPedidoVO> itemsVO = new ArrayList<ItemPedidoVO>();
-		itemsVO = (ArrayList<ItemPedidoVO>) solPeVO.getItemsPedido();
+		List<ItemPedidoVO> itemsVO = controladorDep.getItemsPedidoSolPe(idSolPe2);
+		
+		//CAMBIO
+		solPeVO.setItemsPedido(itemsVO);
 		ArrayList<Integer> cantidadesStock = new ArrayList<Integer>();
-		for(ItemPedidoVO itemVO : itemsVO)
+		for(ItemPedidoVO itemVO : solPeVO.getItemsPedido())
 		{
 			int cant = 0;
 			cant=controladorDep.getStockArticulo(itemVO.getArticulo().getIdArticulo());

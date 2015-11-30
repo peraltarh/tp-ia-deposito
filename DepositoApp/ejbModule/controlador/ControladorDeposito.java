@@ -460,4 +460,46 @@ public class ControladorDeposito {
 		s.setCantidad(s.getCantidad()-cantidadADescontar);
 	}
 
+	public List<ItemPedidoVO> getItemsPedidoSolPe(long idSolpe)
+	{
+		List<ItemPedidoVO> itemsPedidoVO = new ArrayList<ItemPedidoVO>();
+		for (ItemPedido itemPedido : dep.getItemsPedidoDeSolpe(idSolpe)) {
+			ItemPedidoVO itemPedidoVO = new ItemPedidoVO();
+			ArticuloVO articuloVO = new ArticuloVO();
+			CategoriaVO categoriaVO = new CategoriaVO();
+			categoriaVO.setIdCategoria(itemPedido.getArticulo().getTipo().getIdCategoria());
+			categoriaVO.setNombre(itemPedido.getArticulo().getTipo().getNombre());
+			articuloVO.setCategoria(categoriaVO);
+			articuloVO.setDescripcion(itemPedido.getArticulo().getDescripcion());
+			articuloVO.setFechaAlta(itemPedido.getArticulo().getFechaAlta());
+			articuloVO.setFichaTecnica(itemPedido.getArticulo().getFichaTecnica());
+			articuloVO.setIdArticulo(itemPedido.getArticulo().getIdArticulo());
+			articuloVO.setIdStock(this.obtenerStock(itemPedido.getArticulo().getIdArticulo()).getIdStock());
+			articuloVO.setMarca(itemPedido.getArticulo().getMarca());
+			articuloVO.setNombre(itemPedido.getArticulo().getNombre());
+			articuloVO.setOrigen(itemPedido.getArticulo().getOrigen());
+			articuloVO.setPrecio(itemPedido.getArticulo().getPrecio());
+			articuloVO.setStock(this.obtenerStock(itemPedido.getArticulo().getIdArticulo()).getCantidad());
+			articuloVO.setUrlFoto(itemPedido.getArticulo().getUrlFoto());
+			itemPedidoVO.setArticulo(articuloVO);
+			itemPedidoVO.setCantidad(itemPedido.getCantidad());
+			itemPedidoVO.setIdItemPedido(itemPedido.getIdItemPedido());
+			switch (itemPedido.getEstado()) {
+			case ENTREGADO:
+				itemPedidoVO.setEstado(EnumEstadoItemPedidoVO.ENTREGADO);
+				break;
+			case FALLIDO:
+				itemPedidoVO.setEstado(EnumEstadoItemPedidoVO.FALLIDO);
+				break;
+			case PENDIENTE:
+				itemPedidoVO.setEstado(EnumEstadoItemPedidoVO.PENDIENTE);
+				break;
+			case SOLICITADO:
+				itemPedidoVO.setEstado(EnumEstadoItemPedidoVO.SOLICITADO);
+				break;
+			}
+			itemsPedidoVO.add(itemPedidoVO);
+		}
+		return itemsPedidoVO;
+	}
 }
