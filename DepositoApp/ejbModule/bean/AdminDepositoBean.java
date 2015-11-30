@@ -10,6 +10,7 @@ import modelo.Articulo;
 import modelo.Categoria;
 import modelo.EnumSolicitudDePedido;
 import modelo.Envio;
+import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.SolicitudDePedido;
 import modelo.Stock;
@@ -87,6 +88,11 @@ public class AdminDepositoBean {
 	public Envio guardarEnvio(Envio envio) {
 		return adminEnv.grabarEnvio(envio);
 		
+	}
+	
+	public List<ItemPedido> getItemsPedidoDeSolpe(long idSolpe)
+	{
+		return adminSolPe.getItemsPedidoDeSolpe(idSolpe);
 	}
 
 }

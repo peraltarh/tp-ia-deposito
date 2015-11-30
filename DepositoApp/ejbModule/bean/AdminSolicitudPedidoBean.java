@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import modelo.Articulo;
 import modelo.EnumEstadoPedido;
 import modelo.EnumSolicitudDePedido;
+import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.SolicitudDePedido;
 
@@ -35,5 +36,11 @@ public class AdminSolicitudPedidoBean {
 		return em.find(SolicitudDePedido.class, idSolPe);
 	}
 
+	public List<ItemPedido> getItemsPedidoDeSolpe(long idSolPe){
+		Query q = em.createQuery("FROM ItemPedido iP WHERE idSolicitudDePedido =:idSolPe AND idPedido IS NULL").setParameter("idSolPe",idSolPe);
+		List<ItemPedido> resultado = (List<ItemPedido>) q.getResultList();
+
+		return resultado;
+	}
 
 }

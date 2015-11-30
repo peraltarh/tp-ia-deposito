@@ -428,25 +428,29 @@ public class ControladorDeposito {
 		envio.setFecha(Calendar.getInstance().getTime());
 		envio.setEstado(EnumEstadoEnvio.ENTREGADO);
 		envio.setSolicitudDePedido(solPe);
-
+	
+		
 		int i=0;
 
 		ArrayList <ItemPedido> itemsPedidoEnvio = new ArrayList<ItemPedido>();
-		for(ItemPedido itemPedido : solPe.getItemsPedido())
+		for(ItemPedido itemPedido : dep.getItemsPedidoDeSolpe(solPe.getIdSolicitudDePedido()))
 		{
 			ItemPedido itemPedidoEnvio = new ItemPedido();
 			itemPedidoEnvio = itemPedido;
 			itemPedidoEnvio.setCantidad(cantidades.get(i));
 			itemsPedidoEnvio.add(itemPedidoEnvio);
+			
 
 			this.actualizarStock_idArticulo(itemPedido.getArticulo().getIdArticulo(), cantidades.get(i));
 
 			i++;
 		}
 
-		envio.setItemsEnviados(itemsPedidoEnvio);
 		
-		dep.guardarEnvio(envio);
+		envio.setItemsEnviados(itemsPedidoEnvio);		
+		
+		Envio env = dep.guardarEnvio(envio);
+
 		notificacion.entregarArticulosDespacho(solPe, envio);
 	}
 
